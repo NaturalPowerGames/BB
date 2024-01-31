@@ -275,6 +275,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23310581949840810, guid: b8f637dc62673e04881baeb8f5baa100,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79596f5d99df7b34597ae0cc7b3f6322, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -365,13 +370,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.37022835, y: -0, z: -0, w: 0.92894083}
+  m_LocalPosition: {x: 0, y: 8.94, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1648698846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 43.459, y: 0, z: 0}
 --- !u!1 &1614250834
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1614250835}
+  - component: {fileID: 1614250836}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -403,6 +409,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614250836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614250834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116c8022cda8b44429b063d1262834a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSizeX: 10
+  gridSizeY: 10
+  tileSize: 1
 --- !u!1 &1648698840
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +438,7 @@ GameObject:
   - component: {fileID: 1648698843}
   - component: {fileID: 1648698842}
   - component: {fileID: 1648698841}
+  - component: {fileID: 1648698847}
   m_Layer: 0
   m_Name: ECM_Character
   m_TagString: Untagged
@@ -562,9 +584,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 233423058}
-  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1648698847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648698840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790d2686ebe839c4b8b26195ed28550b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 1614250836}
+  plantPrefab: {fileID: 1350282893767089657, guid: 8b2aa50adfddc9a4ebac23e4124eb5ba,
+    type: 3}
 --- !u!1 &2020504281
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +662,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9e073750c8e31df4cb86c7618e8b3849, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,5 +713,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 2020504285}
+  - {fileID: 963194228}
   - {fileID: 1648698846}
   - {fileID: 1614250835}

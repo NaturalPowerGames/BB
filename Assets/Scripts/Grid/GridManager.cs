@@ -1,10 +1,9 @@
+using System;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridSizeX = 5;
-    public int gridSizeY = 5;
-    public float tileSize = 1.0f;
+
 
     public Tile[,] gridTiles;
 
@@ -15,16 +14,41 @@ public class GridManager : MonoBehaviour
 
     void CreateGrid()
     {
-        gridTiles = new Tile[gridSizeX, gridSizeY];
+        gridTiles = new Tile[GridConstants.gridSizeX, GridConstants.gridSizeY];
 
-        for (int x = 0; x < gridSizeX; x++)
+        for (int x = 0; x < GridConstants.gridSizeX; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < GridConstants.gridSizeY; y++)
             {
                 Tile tile = new Tile(x, y);
                 gridTiles[x, y] = tile;
             }
         }
+    }
+     Vector2 getMousePosInGrid()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return new Vector2(hit.point.x, hit.point.z);
+        }
+        throw new InvalidOperationException("No hit point found.");
+    }
+
+    public Tile GetClickedTile()
+    {
+        Vector2 mousePos = getMousePosInGrid();
+        int x = Mathf.FloorToInt(mousePos.x / GridConstants.tileSize);
+        int y = Mathf.FloorToInt(mousePos.y / GridConstants.tileSize);
+
+        if (x >= 0 && x < GridConstants.gridSizeX && y >= 0 && y < GridConstants.gridSizeY)
+        {
+            return gridTiles[x, y];
+        }
+
+        return null;
     }
 
     private void OnDrawGizmos()
@@ -36,14 +60,14 @@ public class GridManager : MonoBehaviour
     {
         Gizmos.color = Color.blue;
 
-        for (float x = 0; x <= gridSizeX * tileSize; x += tileSize)
+        for (float x = 0; x <= GridConstants.gridSizeX * GridConstants.tileSize; x += GridConstants.tileSize)
         {
-            Gizmos.DrawLine(new Vector3(x, 0, 0), new Vector3(x, 0, gridSizeY * tileSize));
+            Gizmos.DrawLine(new Vector3(x, 0, 0), new Vector3(x, 0, GridConstants.gridSizeY * GridConstants.tileSize));
         }
 
-        for (float y = 0; y <= gridSizeY * tileSize; y += tileSize)
+        for (float y = 0; y <= GridConstants.gridSizeY * GridConstants.tileSize; y += GridConstants.tileSize)
         {
-            Gizmos.DrawLine(new Vector3(0, 0, y), new Vector3(gridSizeX * tileSize, 0, y));
+            Gizmos.DrawLine(new Vector3(0, 0, y), new Vector3(GridConstants.gridSizeX * GridConstants.tileSize, 0, y));
         }
     }
 }
