@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GridInteractions : MonoBehaviour
@@ -5,19 +6,21 @@ public class GridInteractions : MonoBehaviour
     public GridManager gridManager;
     public GameObject plantPrefab;
 
-    void Update()
+	private void OnEnable()
+	{
+        GridEvents.OnPlantRequested += OnPlantRequested;
+	}
+    private void OnDisable()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Tile clickedTile = gridManager.GetClickedTile();
-            if (clickedTile != null && clickedTile.TileStatus == TileStatus.Empty)
-            {
-                plantSeed(clickedTile);
-            }
-        }
+        GridEvents.OnPlantRequested += OnPlantRequested;
     }
 
-    void plantSeed(Tile clickedTile)
+	private void OnPlantRequested(Tile tile)
+	{        
+        PlantSeed(tile);
+    }
+
+    void PlantSeed(Tile clickedTile)
     {
         GameObject newPlant = Instantiate(plantPrefab, new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
         newPlant.transform.position = calculatePositionInGrid(clickedTile, newPlant);

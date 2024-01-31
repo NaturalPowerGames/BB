@@ -3,71 +3,89 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+	public Tile[,] gridTiles;
 
+	void Start()
+	{
+		CreateGrid();
+	}
 
-    public Tile[,] gridTiles;
+	private void OnEnable()
+	{
+		InputEvents.OnRightMouseButtonDown += OnRightMouseButtonDown;
+	}
 
-    void Start()
-    {
-        CreateGrid();
-    }
+	private void OnDisable()
+	{
+		InputEvents.OnRightMouseButtonDown -= OnRightMouseButtonDown;
+	}
 
-    void CreateGrid()
-    {
-        gridTiles = new Tile[GridConstants.gridSizeX, GridConstants.gridSizeY];
+	private void OnRightMouseButtonDown()
+	{
+		var tile = GetClickedTile();
+		if(tile.TileStatus == TileStatus.Empty)
+		{
+			GridEvents.OnPlantRequested?.Invoke(tile);
+		}
+	}
 
-        for (int x = 0; x < GridConstants.gridSizeX; x++)
-        {
-            for (int y = 0; y < GridConstants.gridSizeY; y++)
-            {
-                Tile tile = new Tile(x, y);
-                gridTiles[x, y] = tile;
-            }
-        }
-    }
-     Vector2 getMousePosInGrid()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+	private void CreateGrid()
+	{
+		gridTiles = new Tile[GridConstants.gridSizeX, GridConstants.gridSizeY];
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            return new Vector2(hit.point.x, hit.point.z);
-        }
-        throw new InvalidOperationException("No hit point found.");
-    }
+		for (int x = 0; x < GridConstants.gridSizeX; x++)
+		{
+			for (int y = 0; y < GridConstants.gridSizeY; y++)
+			{
+				Tile tile = new Tile(x, y);
+				gridTiles[x, y] = tile;
+			}
+		}
+	}
 
-    public Tile GetClickedTile()
-    {
-        Vector2 mousePos = getMousePosInGrid();
-        int x = Mathf.FloorToInt(mousePos.x / GridConstants.tileSize);
-        int y = Mathf.FloorToInt(mousePos.y / GridConstants.tileSize);
+	private Vector2 GetMousePosInGrid()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
 
-        if (x >= 0 && x < GridConstants.gridSizeX && y >= 0 && y < GridConstants.gridSizeY)
-        {
-            return gridTiles[x, y];
-        }
+		if (Physics.Raycast(ray, out hit))
+		{
+			return new Vector2(hit.point.x, hit.point.z);
+		}
+		throw new InvalidOperationException("No hit point found.");
+	}
 
-        return null;
-    }
+	public Tile GetClickedTile()
+	{
+		Vector2 mousePos = GetMousePosInGrid();
+		int x = Mathf.FloorToInt(mousePos.x / GridConstants.tileSize);
+		int y = Mathf.FloorToInt(mousePos.y / GridConstants.tileSize);
 
-    private void OnDrawGizmos()
-    {
-        DrawGrid();
-    }
+		if (x >= 0 && x < GridConstants.gridSizeX && y >= 0 && y < GridConstants.gridSizeY)
+		{
+			return gridTiles[x, y];
+		}
 
-    void DrawGrid()
-    {
-        Gizmos.color = Color.blue;
+		return null;
+	}
 
-        for (float x = 0; x <= GridConstants.gridSizeX * GridConstants.tileSize; x += GridConstants.tileSize)
-        {
-            Gizmos.DrawLine(new Vector3(x, 0, 0), new Vector3(x, 0, GridConstants.gridSizeY * GridConstants.tileSize));
-        }
+	private void OnDrawGizmos()
+	{
+		DrawGrid();
+	}
 
-        for (float y = 0; y <= GridConstants.gridSizeY * GridConstants.tileSize; y += GridConstants.tileSize)
-        {
-            Gizmos.DrawLine(new Vector3(0, 0, y), new Vector3(GridConstants.gridSizeX * GridConstants.tileSize, 0, y));
-        }
-    }
+	void DrawGrid()
+	{
+		Gizmos.color = Color.blue;
+
+		for (float x = 0; x <= GridConstants.gridSizeX * GridConstants.tileSize; x += GridConstants.tileSize)
+		{
+			Gizmos.DrawLine(new Vector3(x, 0, 0), new Vector3(x, 0, GridConstants.gridSizeY * GridConstants.tileSize));
+		}
+
+		for (float y = 0; y <= GridConstants.gridSizeY * GridConstants.tileSize; y += GridConstants.tileSize)
+		{
+			Gizmos.DrawLine(new Vector3(0, 0, y), new Vector3(GridConstants.gridSizeX * GridConstants.tileSize, 0, y));
+		}
+	}
 }
