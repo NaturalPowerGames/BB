@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4644098978213376745}
   - component: {fileID: 2269648213107248865}
   - component: {fileID: 741611346104417997}
+  - component: {fileID: 616040941513258911}
   m_Layer: 0
   m_Name: Monster_WolfPup
   m_TagString: Untagged
@@ -69,6 +70,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+--- !u!114 &616040941513258911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533486097693977732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938d3ec6331aa3f41a4253ed67225d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3109170550294239474
 PrefabInstance:
   m_ObjectHideFlags: 0

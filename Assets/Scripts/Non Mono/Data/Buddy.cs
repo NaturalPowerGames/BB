@@ -1,9 +1,11 @@
+using UnityEngine;
 
 [System.Serializable]
 public class Buddy
 {
 	private float[] needs;
 	private bool hasHabitatAssigned;
+	public BuddyType buddyType;
 
 	public float GetNeed(Need need)
 	{
@@ -13,6 +15,7 @@ public class Buddy
 	public void Initialize(Buddy buddy)
 	{
 		this.needs = buddy.needs;
+		this.buddyType = buddy.buddyType;
 	}
 
 	public Buddy(float[] needs)
