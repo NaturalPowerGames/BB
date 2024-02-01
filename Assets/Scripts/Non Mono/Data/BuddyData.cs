@@ -7,8 +7,10 @@ namespace BB.Buddies
 	[System.Serializable]
 	public class BuddyData
 	{
-		public HabitatType PreferredHabitat;
+		[EnumNamedArray(typeof(Ability))]
+		public int[] BaseAbilityScores;
 		[EnumNamedArray(typeof(Need))]
 		public float[] RatesPerTick;
+		public HabitatType PreferredHabitat;
 	}
 }

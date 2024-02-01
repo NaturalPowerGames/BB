@@ -13,10 +13,27 @@ MonoBehaviour:
   m_Name: BuddyDatas
   m_EditorClassIdentifier: 
   data:
-  - PreferredHabitat: 0
+  - BaseAbilityScores: 01000000010000000100000001000000
     RatesPerTick:
     - 0.1
     - 0.1
     - 0.1
     - 0.1
     - 0.1
+    PreferredHabitat: 3
+  - BaseAbilityScores: 01000000010000000100000001000000
+    RatesPerTick:
+    - 0.1
+    - 0.1
+    - 0.1
+    - 0.1
+    - 0.1
+    PreferredHabitat: 1
+  - BaseAbilityScores: 01000000010000000100000001000000
+    RatesPerTick:
+    - 0.1
+    - 0.1
+    - 0.1
+    - 0.1
+    - 0.1
+    PreferredHabitat: 2

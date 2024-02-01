@@ -1,7 +1,10 @@
-public enum Ability
+namespace BB.Buddies
 {
-	Farming,
-	Brawling,
-	Handicraft,
-	Reason
+	public enum Ability
+	{
+		Farming,
+		Brawling,
+		Handicraft,
+		Reason
+	}
 }
