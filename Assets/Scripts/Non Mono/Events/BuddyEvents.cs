@@ -1,3 +1,4 @@
+using BB.Buddies;
 using System;
 
 public static class BuddyEvents 
