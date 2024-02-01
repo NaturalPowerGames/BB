@@ -1,8 +1,11 @@
-public enum Need
+namespace BB.Buddies
 {
-	Food,
-	Water,
-	Sleep,
-	Social,
-	Comfort
+	public enum Need
+	{
+		Food,
+		Water,
+		Sleep,
+		Social,
+		Comfort
+	}
 }

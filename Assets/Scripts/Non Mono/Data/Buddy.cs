@@ -1,4 +1,3 @@
-
 namespace BB.Buddies
 {
 	[System.Serializable]
