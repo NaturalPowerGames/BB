@@ -23,7 +23,7 @@ public class GridManager : MonoBehaviour
 	private void OnRightMouseButtonDown()
 	{
 		var tile = GetClickedTile();
-		if(tile.TileStatus == TileStatus.Empty)
+		if(tile?.TileStatus == TileStatus.Empty)
 		{
 			GridEvents.OnPlantRequested?.Invoke(tile);
 		}
