@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 276924240379962844}
   - component: {fileID: 2847623906829141184}
   - component: {fileID: 2392999862903177549}
+  - component: {fileID: -4411230797975169617}
   m_Layer: 0
   m_Name: Monster_Bomb
   m_TagString: Untagged
@@ -69,6 +70,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-4411230797975169617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797874003783603064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938d3ec6331aa3f41a4253ed67225d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5438301775136210
 PrefabInstance:
   m_ObjectHideFlags: 0
