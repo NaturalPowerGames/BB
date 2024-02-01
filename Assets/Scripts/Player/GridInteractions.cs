@@ -1,38 +1,38 @@
+using System;
 using UnityEngine;
 
 public class GridInteractions : MonoBehaviour
 {
     public GridManager gridManager;
+    public GameObject plantPrefab;
 
-    void Update()
+	private void OnEnable()
+	{
+        GridEvents.OnPlantRequested += OnPlantRequested;
+	}
+    private void OnDisable()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Tile clickedTile = GetClickedTile(hit.point);
-
-                if (clickedTile != null)
-                {
-                    Debug.Log("Clicked on Grid Tile: (" + clickedTile.x + ", " + clickedTile.y + ")");
-                }
-            }
-        }
+        GridEvents.OnPlantRequested += OnPlantRequested;
     }
 
-    Tile GetClickedTile(Vector3 clickPosition)
+	private void OnPlantRequested(Tile tile)
+	{        
+        PlantSeed(tile);
+    }
+
+    void PlantSeed(Tile clickedTile)
     {
-        int x = Mathf.FloorToInt(clickPosition.x / gridManager.tileSize);
-        int y = Mathf.FloorToInt(clickPosition.z / gridManager.tileSize);
+        GameObject newPlant = Instantiate(plantPrefab, new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
+        newPlant.transform.position = calculatePositionInGrid(clickedTile, newPlant);
 
-        if (x >= 0 && x < gridManager.gridSizeX && y >= 0 && y < gridManager.gridSizeY)
-        {
-            return gridManager.gridTiles[x, y];
-        }
+        clickedTile.TileStatus = TileStatus.Occupied;
+    }
 
-        return null; 
+    Vector3 calculatePositionInGrid(Tile clickedTile, GameObject gameObject)
+    {
+        Vector3 scale = gameObject.transform.localScale;
+        float x = clickedTile.X + GridConstants.tileSize - scale.x;
+        float y = clickedTile.Y + GridConstants.tileSize - scale.y;
+        return new Vector3(x, 0, y);
     }
 }
