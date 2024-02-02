@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2269648213107248865}
   - component: {fileID: 741611346104417997}
   - component: {fileID: 616040941513258911}
+  - component: {fileID: 435881392021022408}
   m_Layer: 0
   m_Name: Monster_WolfPup
   m_TagString: Untagged
@@ -46,7 +47,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 1000
+  m_Acceleration: 1200
   avoidancePriority: 50
   m_AngularSpeed: 5000
   m_StoppingDistance: 0.5
@@ -69,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10c7c97dafd0314b8af967a487e23cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 0}
 --- !u!114 &616040941513258911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +82,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938d3ec6331aa3f41a4253ed67225d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &435881392021022408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533486097693977732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &3109170550294239474
 PrefabInstance:
   m_ObjectHideFlags: 0

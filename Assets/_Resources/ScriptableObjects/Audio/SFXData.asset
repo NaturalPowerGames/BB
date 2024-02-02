@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42491e24fdf714c43ad9bc47deb990dc, type: 3}
   m_Name: SFXData
   m_EditorClassIdentifier: 
-  SFXClips: []
+  SFXClips:
+  - {fileID: 0}
+  - {fileID: 0}

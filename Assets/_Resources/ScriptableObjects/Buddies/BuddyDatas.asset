@@ -20,6 +20,12 @@ MonoBehaviour:
     - 0.1
     - 0.1
     - 0.1
+    BaseNeeds:
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
     PreferredHabitat: 3
   - BaseAbilityScores: 01000000010000000100000001000000
     RatesPerTick:
@@ -28,6 +34,12 @@ MonoBehaviour:
     - 0.1
     - 0.1
     - 0.1
+    BaseNeeds:
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
     PreferredHabitat: 1
   - BaseAbilityScores: 01000000010000000100000001000000
     RatesPerTick:
@@ -36,4 +48,10 @@ MonoBehaviour:
     - 0.1
     - 0.1
     - 0.1
+    BaseNeeds:
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
     PreferredHabitat: 2
