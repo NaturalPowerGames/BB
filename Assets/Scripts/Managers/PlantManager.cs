@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +7,47 @@ namespace PP.Plants
 {
     public class PlantManager : MonoBehaviour
     {
-        public List<PlantController> growingPlants = new List<PlantController>();
-        public List<PlantController> readyPlants = new List<PlantController>();
+        [SerializeField]
+        private List<PlantController> growingPlants = new List<PlantController>();
+        [SerializeField]
+        private List<PlantController> readyPlants = new List<PlantController>();
+        [SerializeField]
+        private PlantPrefabs plantPrefabs;
+        [SerializeField]
+        private PlantDataContainer plantDataContainer;
 
         private void OnEnable()
         {
+            PlantEvents.OnPlantCreationRequested += OnPlantCreationRequested;
             PlantEvents.OnPlantCreated += OnPlantCreated;
         }
 
-        private void OnDisable()
+		private void OnPlantCreationRequested(Tile clickedTile)
+		{
+            GameObject newPlant = Instantiate(plantPrefabs.prefabs[1], new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
+            PlantController plantController = newPlant.GetComponent<PlantController>();
+            plantController.prefab = newPlant;
+            if (plantController == null)
+            {
+                throw new Exception("New plant cannot be created");
+            }
+            plantController.plant = new Plant(plantDataContainer.data[1]);
+            newPlant.transform.position = Vector3Calculator.CalculatePositionInGrid(clickedTile, newPlant);
+            clickedTile.TileStatus = TileStatus.Occupied;
+            PlantEvents.OnPlantCreated?.Invoke(plantController);
+        }
+
+		private void OnDisable()
         {
             PlantEvents.OnPlantCreated -= OnPlantCreated;
         }
+
         private void Start()
         {
             StartCoroutine(UpdateGrowPoints());
         }
-        IEnumerator UpdateGrowPoints()
+
+        private IEnumerator UpdateGrowPoints()
         {
             while (true)
             {
@@ -41,7 +66,8 @@ namespace PP.Plants
                 }
             }
         }
-        void OnPlantCreated(PlantController plant)
+
+        private void OnPlantCreated(PlantController plant)
         {
             growingPlants.Add(plant);
         }

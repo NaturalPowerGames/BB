@@ -7,8 +7,8 @@ namespace PP.Plants
 	[System.Serializable]
     public class Plant
     {
-        public string plantName;
-        public int growPoints;
+        private string plantName;
+        private int growPoints;
         public PlantStatus status;
         public PlantType plantType;
 
