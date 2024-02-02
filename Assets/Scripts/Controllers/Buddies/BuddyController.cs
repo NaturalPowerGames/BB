@@ -1,9 +1,10 @@
+using BB.TimeManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace BB.Buddies
 {
-	public class BuddyController : MonoBehaviour, IPointerDownHandler
+	public class BuddyController : MonoBehaviour, IPointerDownHandler, ITickListener
 	{
 		private Buddy buddy;
 
@@ -12,9 +13,20 @@ namespace BB.Buddies
 			BuddyEvents.OnBuddySelected?.Invoke(buddy);
 		}
 
-		private void Initialize(Buddy buddy)
+		public void Initialize(Buddy buddy)
 		{			
 			this.buddy = buddy;
+			SubscribeToTicks(TickTime.Large);
+		}
+
+		public void SubscribeToTicks(TickTime tickTime)
+		{
+			TimeEvents.OnRegisterTickListenerRequested.Invoke(this, tickTime);
+		}
+
+		public void OnTicked()
+		{
+			buddy.DecreaseAllNeeds();
 		}
 	}
 }

@@ -21,6 +21,7 @@ namespace BB.UI
 		private void Awake()
 		{
 			SetupButtons();
+			ToggleVisuals(false);
 		}
 
 		private void OnEnable()

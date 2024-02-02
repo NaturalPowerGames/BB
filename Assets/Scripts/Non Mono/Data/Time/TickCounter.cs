@@ -5,21 +5,21 @@ namespace BB.TimeManagement
 	public class TickCounter
 	{
 		private int ticksSinceCreated = 0;
-		private float tickTimer, tickCountdown;
+		private float baseTickTime, tickTimer;
 		public int TicksSinceCreated => ticksSinceCreated;
 		public Action OnTicked;
 
 		public TickCounter(TickTime tickTime)
 		{
-			tickTimer = Constants.TickTimes[(int)tickTime];
+			baseTickTime = Constants.TickTimes[(int)tickTime];
 		}
 
 		public void Tick(float deltaTime)
 		{
-			tickCountdown -= deltaTime;
-			if (tickCountdown > tickTimer)
+			tickTimer += deltaTime;
+			if (tickTimer > baseTickTime)
 			{
-				tickCountdown -= tickTimer;
+				tickTimer -= baseTickTime;
 				ticksSinceCreated++;
 				OnTicked?.Invoke();
 			}

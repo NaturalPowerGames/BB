@@ -6,19 +6,6 @@ namespace BB.Buddies
 	public class Buddy
 	{
 		private float[] needs;
-		public float[] Needs
-		{
-			get
-			{
-				return needs;
-			}
-			set
-			{
-				needs = value;
-				OnNeedsChanged?.Invoke(needs);
-			}
-		}
-
 		private float[] ratesPerTick;
 		private bool hasHabitatAssigned;
 		private HabitatType currentHabitat;
@@ -40,20 +27,31 @@ namespace BB.Buddies
 			return needs[(int)need];
 		}
 
-		public Buddy(float[] needs, float[] ratesPerTick)
+		public void DecreaseAllNeeds()
 		{
-			this.Needs = needs;
+			for (int i = 0; i < needs.Length; i++)
+			{
+				DecreaseNeed((Need)i);
+			}
+		}
+
+		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick)
+		{
+			this.buddyType = buddyType;
+			this.needs = needs;
 			this.ratesPerTick = ratesPerTick;
 		}
 
 		public void DecreaseNeed(Need need)
 		{
-			Needs[(int)need] -= ratesPerTick[(int)need];
+			needs[(int)need] -= ratesPerTick[(int)need];
+			OnNeedsChanged?.Invoke(needs);
 		}
 
 		public void HealNeed(Need need, float amount)
 		{
-			Needs[(int)need] += amount;
+			needs[(int)need] += amount;
+			OnNeedsChanged?.Invoke(needs);
 		}
 	}
 }

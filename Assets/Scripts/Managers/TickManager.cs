@@ -19,7 +19,7 @@ namespace BB.TimeManagement
 
 		private void OnDisable()
 		{
-			TimeEvents.OnRegisterTickListenerRequested += OnTickerRequested;
+			TimeEvents.OnRegisterTickListenerRequested -= OnTickerRequested;
 		}
 
 		private void OnTickerRequested(ITickListener listener, TickTime tickTime)
