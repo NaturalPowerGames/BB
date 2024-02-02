@@ -1,38 +1,28 @@
+using PP.Plants;
 using System;
 using UnityEngine;
 
 public class GridInteractions : MonoBehaviour
 {
     public GridManager gridManager;
-    public GameObject plantPrefab;
 
 	private void OnEnable()
 	{
         GridEvents.OnPlantRequested += OnPlantRequested;
 	}
+
     private void OnDisable()
     {
         GridEvents.OnPlantRequested += OnPlantRequested;
     }
 
 	private void OnPlantRequested(Tile tile)
-	{        
+	{
         PlantSeed(tile);
     }
 
-    void PlantSeed(Tile clickedTile)
+    private void PlantSeed(Tile clickedTile)
     {
-        GameObject newPlant = Instantiate(plantPrefab, new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
-        newPlant.transform.position = calculatePositionInGrid(clickedTile, newPlant);
-
-        clickedTile.TileStatus = TileStatus.Occupied;
-    }
-
-    Vector3 calculatePositionInGrid(Tile clickedTile, GameObject gameObject)
-    {
-        Vector3 scale = gameObject.transform.localScale;
-        float x = clickedTile.X + GridConstants.tileSize - scale.x;
-        float y = clickedTile.Y + GridConstants.tileSize - scale.y;
-        return new Vector3(x, 0, y);
-    }
+        PlantEvents.OnPlantCreationRequested?.Invoke(clickedTile);      
+    }    
 }
