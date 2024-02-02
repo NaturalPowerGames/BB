@@ -6,6 +6,6 @@ namespace PP.Plants
 	public class PlantPrefabs : ScriptableObject
 	{
 		[EnumNamedArray(typeof(PlantType))]
-		public GameObject[] prefabs;
+		public PlantController[] prefabs;
 	}
 }

@@ -24,17 +24,11 @@ namespace PP.Plants
 
 		private void OnPlantCreationRequested(Tile clickedTile)
 		{
-            GameObject newPlant = Instantiate(plantPrefabs.prefabs[1], new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
-            PlantController plantController = newPlant.GetComponent<PlantController>();
-            plantController.prefab = newPlant;
-            if (plantController == null)
-            {
-                throw new Exception("New plant cannot be created");
-            }
-            plantController.plant = new Plant(plantDataContainer.data[1]);
-            newPlant.transform.position = Vector3Calculator.CalculatePositionInGrid(clickedTile, newPlant);
+            PlantController newPlant = Instantiate(plantPrefabs.prefabs[1], new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
+            newPlant.plant = new Plant(plantDataContainer.data[1]);
+            newPlant.transform.position = Vector3Calculator.CalculatePositionInGrid(clickedTile, newPlant.transform);
             clickedTile.TileStatus = TileStatus.Occupied;
-            PlantEvents.OnPlantCreated?.Invoke(plantController);
+            PlantEvents.OnPlantCreated?.Invoke(newPlant);
         }
 
 		private void OnDisable()
@@ -60,7 +54,7 @@ namespace PP.Plants
                     {
                         growingPlants.RemoveAt(i);
                         readyPlants.Add(plantController);
-                        plantController.prefab.transform.localScale = new Vector3(0.5f, 2f, 0.5f);
+                        plantController.transform.localScale = new Vector3(0.5f, 2f, 0.5f);
                         continue;
                     }
                 }
