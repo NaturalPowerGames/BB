@@ -27,6 +27,7 @@ namespace BB.UI
 		{
 			BuddyEvents.OnBuddySelected += OnBuddySelected;
 		}
+
 		private void OnDisable()
 		{
 			BuddyEvents.OnBuddySelected += OnBuddySelected;
@@ -34,7 +35,16 @@ namespace BB.UI
 
 		private void OnBuddySelected(Buddy obj)
 		{
-			throw new NotImplementedException();
+			ToggleVisuals(true);
+			obj.OnNeedsChanged += OnNeedsChanged;
+		}
+
+		private void OnNeedsChanged(float[] needs)
+		{
+			for (int i = 0; i < needs.Length; i++)
+			{
+				needTexts[i].text = $"{(Need)i}: {needs[i]}/100";
+			}
 		}
 
 		private void SetupButtons()

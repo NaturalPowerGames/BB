@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BB.Buddies
 {
-	public class BuddyController : MonoBehaviour
+	public class BuddyController : MonoBehaviour, IPointerDownHandler
 	{
-		private BuddyDataUIController dataUI;
 		private Buddy buddy;
 
-		private void Initialize(Buddy buddy)
+		public void OnPointerDown(PointerEventData eventData)
 		{
-			dataUI = GetComponent<BuddyDataUIController>();
-			dataUI.Initialize(buddy);
+			BuddyEvents.OnBuddySelected?.Invoke(buddy);
+		}
+
+		private void Initialize(Buddy buddy)
+		{			
 			this.buddy = buddy;
 		}
 	}

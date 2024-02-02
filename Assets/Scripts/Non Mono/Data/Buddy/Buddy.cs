@@ -1,9 +1,25 @@
+using System;
+
 namespace BB.Buddies
 {
 	[System.Serializable]
 	public class Buddy
 	{
 		private float[] needs;
+		public float[] Needs
+		{
+			get
+			{
+				return needs;
+			}
+			set
+			{
+				needs = value;
+				OnNeedsChanged?.Invoke(needs);
+			}
+		}
+
+		private float[] ratesPerTick;
 		private bool hasHabitatAssigned;
 		private HabitatType currentHabitat;
 		public HabitatType CurrentHabitat
@@ -15,6 +31,8 @@ namespace BB.Buddies
 			}
 		}
 
+		public Action<float[]> OnNeedsChanged;
+
 		public BuddyType buddyType;
 
 		public float GetNeed(Need need)
@@ -22,28 +40,20 @@ namespace BB.Buddies
 			return needs[(int)need];
 		}
 
-		public void Initialize(Buddy buddy)
+		public Buddy(float[] needs, float[] ratesPerTick)
 		{
-			needs = buddy.needs;
-			buddyType = buddy.buddyType;
+			this.Needs = needs;
+			this.ratesPerTick = ratesPerTick;
 		}
 
-		public Buddy(float[] needs)
+		public void DecreaseNeed(Need need)
 		{
-			this.needs = needs;
-		}
-
-		public void DecreaseNeeds(float tickTime)
-		{
-			for (int i = 0; i < needs.Length; i++)
-			{
-				needs[i] -= tickTime;
-			}
+			Needs[(int)need] -= ratesPerTick[(int)need];
 		}
 
 		public void HealNeed(Need need, float amount)
 		{
-			needs[(int)need] += amount;
+			Needs[(int)need] += amount;
 		}
 	}
 }

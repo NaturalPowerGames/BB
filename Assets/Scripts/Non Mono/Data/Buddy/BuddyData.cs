@@ -10,6 +10,8 @@ namespace BB.Buddies
 		public int[] BaseAbilityScores;
 		[EnumNamedArray(typeof(Need))]
 		public float[] RatesPerTick;
+		[EnumNamedArray(typeof(Need))]
+		public float[] BaseNeeds;
 		public HabitatType PreferredHabitat;
 	}
 }
