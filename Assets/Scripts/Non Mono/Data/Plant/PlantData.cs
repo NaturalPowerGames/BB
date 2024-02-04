@@ -1,4 +1,4 @@
-namespace PP.Plants
+namespace BB.Plants
 {
     /// <summary>
     /// Contains the balancing data for each plant

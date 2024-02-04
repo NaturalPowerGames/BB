@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PP.Plants
+namespace BB.Plants
 {
 	[CreateAssetMenu]
 	public class PlantPrefabs : ScriptableObject

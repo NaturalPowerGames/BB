@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace PP.Plants
+namespace BB.Plants
 {
     public class PlantController : MonoBehaviour
     {

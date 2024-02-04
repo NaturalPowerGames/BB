@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using BB.Grid;
 
 public class GridManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GridManager : MonoBehaviour
 	private void OnEnable()
 	{
 		InputEvents.OnRightMouseButtonDown += OnRightMouseButtonDown;
-	}
+    }
 
 	private void OnDisable()
 	{
@@ -27,9 +28,21 @@ public class GridManager : MonoBehaviour
 		{
 			GridEvents.OnPlantRequested?.Invoke(tile);
 		}
+
+		if (tile?.TileStatus == TileStatus.Occupied && tile.PlantStatus == PlantStatus.Ready)
+		{
+            HarvestPlant(tile);
+		}
 	}
 
-	private void CreateGrid()
+	private void HarvestPlant(Tile tile)
+	{
+		tile.TileStatus = TileStatus.Empty;
+		PlantEvents.OnPlantHarvested?.Invoke(tile.PlantController.plant);
+		GameObject.Destroy(tile.PlantController.gameObject);
+	}
+
+    private void CreateGrid()
 	{
 		gridTiles = new Tile[GridConstants.gridSizeX, GridConstants.gridSizeY];
 
@@ -45,10 +58,12 @@ public class GridManager : MonoBehaviour
 
 	private Vector2 GetMousePosInGrid()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        int gridLayerMask = LayerMask.GetMask("Grid");
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
-		if(Physics.Raycast(ray, out hit))
+		if(Physics.Raycast(ray, out hit, GridConstants.maxRaycastDistance, gridLayerMask))
 		{
 			return new Vector2(hit.point.x, hit.point.z);
 		}
