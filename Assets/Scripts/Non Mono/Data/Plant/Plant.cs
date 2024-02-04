@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PP.Plants
+namespace BB.Plants
 {
 	[System.Serializable]
     public class Plant
@@ -33,7 +33,6 @@ namespace PP.Plants
         {
             if (this.status == PlantStatus.Growing && this.growPoints > 30) 
             {
-                Debug.Log(this.status);
                 UpdatePlantStage();
                 return true; 
             }

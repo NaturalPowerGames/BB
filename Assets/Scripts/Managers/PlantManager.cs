@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BB.Grid;
 
-namespace PP.Plants
+namespace BB.Plants
 {
     public class PlantManager : MonoBehaviour
     {
@@ -20,20 +20,27 @@ namespace PP.Plants
         {
             PlantEvents.OnPlantCreationRequested += OnPlantCreationRequested;
             PlantEvents.OnPlantCreated += OnPlantCreated;
+            PlantEvents.OnPlantHarvested += OnPlantHarvested;
         }
-
-		private void OnPlantCreationRequested(Tile clickedTile)
-		{
-            PlantController newPlant = Instantiate(plantPrefabs.prefabs[1], new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
-            newPlant.plant = new Plant(plantDataContainer.data[1]);
-            newPlant.transform.position = Vector3Calculator.CalculatePositionInGrid(clickedTile, newPlant.transform);
-            clickedTile.TileStatus = TileStatus.Occupied;
-            PlantEvents.OnPlantCreated?.Invoke(newPlant);
-        }
-
-		private void OnDisable()
+        private void OnDisable()
         {
-            PlantEvents.OnPlantCreated -= OnPlantCreated;
+            PlantEvents.OnPlantCreationRequested -= OnPlantCreationRequested;
+            PlantEvents.OnPlantHarvested -= OnPlantHarvested;
+        }
+
+        private void OnPlantHarvested(Plant plant)
+        {
+            Debug.Log("harvest: " + plant.PlantName);
+        }
+
+        private void OnPlantCreationRequested(Tile clickedTile)
+		{
+            PlantController newPlantController = Instantiate(plantPrefabs.prefabs[1], new Vector3(clickedTile.X * GridConstants.tileSize, 0f, clickedTile.Y * GridConstants.tileSize), Quaternion.identity);
+            newPlantController.plant = new Plant(plantDataContainer.data[1]);
+            newPlantController.transform.position = Vector3Calculator.CalculatePositionInGrid(clickedTile, newPlantController.transform);
+            clickedTile.TileStatus = TileStatus.Occupied;
+            clickedTile.PlantController = newPlantController;
+            PlantEvents.OnPlantCreated?.Invoke(newPlantController);
         }
 
         private void Start()
