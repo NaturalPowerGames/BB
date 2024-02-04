@@ -25,6 +25,7 @@ namespace BB.Plants
         private void OnDisable()
         {
             PlantEvents.OnPlantCreationRequested -= OnPlantCreationRequested;
+            PlantEvents.OnPlantCreated -= OnPlantCreated;
             PlantEvents.OnPlantHarvested -= OnPlantHarvested;
         }
 
