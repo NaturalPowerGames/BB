@@ -7,7 +7,10 @@ namespace BB.Buddies
 	{
 		private float[] needs;
 		private float[] ratesPerTick;
+		private float[] needUrgencyThresholds;
+		private bool[] needsReportedAsUrgent;
 		private bool hasHabitatAssigned;
+
 		private HabitatType currentHabitat;
 		public HabitatType CurrentHabitat
 		{
@@ -19,7 +22,7 @@ namespace BB.Buddies
 		}
 
 		public Action<float[]> OnNeedsChanged;
-
+		public Action<Need> OnNeedUrgent;
 		public BuddyType buddyType;
 
 		public float GetNeed(Need need)
@@ -35,23 +38,33 @@ namespace BB.Buddies
 			}
 		}
 
-		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick)
+		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick, float[] needsUrgencyThresholds)
 		{
 			this.buddyType = buddyType;
 			this.needs = needs;
 			this.ratesPerTick = ratesPerTick;
+			this.needUrgencyThresholds = needsUrgencyThresholds;
+			this.needsReportedAsUrgent = new bool[needsUrgencyThresholds.Length];
 		}
 
 		public void DecreaseNeed(Need need)
 		{
 			needs[(int)need] -= ratesPerTick[(int)need];
 			OnNeedsChanged?.Invoke(needs);
+			if (IsNeedUrgent(need) && !needsReportedAsUrgent[(int)need])
+			{
+				OnNeedUrgent?.Invoke(need);
+				needsReportedAsUrgent[(int)need] = true;
+			}
 		}
 
 		public void HealNeed(Need need, float amount)
 		{
 			needs[(int)need] += amount;
 			OnNeedsChanged?.Invoke(needs);
+			needsReportedAsUrgent[(int)need] = false;
 		}
+
+		private bool IsNeedUrgent(Need need) => needs[(int)need] >= needUrgencyThresholds[(int)need];
 	}
 }
