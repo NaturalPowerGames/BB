@@ -38,9 +38,9 @@ public class GridManager : MonoBehaviour
 	private void HarvestPlant(Tile tile)
 	{
 		tile.TileStatus = TileStatus.Empty;
-		PlantEvents.OnPlantHarvested?.Invoke(tile.PlantController.plant);
-		GameObject.Destroy(tile.PlantController.gameObject);
-	}
+		PlantEvents.OnPlantHarvested?.Invoke(tile.PlantController.plant); // This event do nothing for now, will be used later for removing harvest task in task queue
+        GameObject.Destroy(tile.PlantController.gameObject);
+    }
 
     private void CreateGrid()
 	{
