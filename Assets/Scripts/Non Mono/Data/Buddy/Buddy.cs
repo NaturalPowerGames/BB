@@ -23,7 +23,7 @@ namespace BB.Buddies
 		}
 
 		public Action<float[]> OnNeedsChanged;
-		public Action<Need> OnNeedUrgent;
+		public Action<Need,bool> OnNeedUrgencyChanged;
 		public Action<Need> OnNeedFullyRecovered;
 		public BuddyType buddyType;
 
@@ -56,7 +56,7 @@ namespace BB.Buddies
 			OnNeedsChanged?.Invoke(needs);
 			if (IsNeedUrgent(need) && !needsReportedAsUrgent[(int)need])
 			{
-				OnNeedUrgent?.Invoke(need);
+				OnNeedUrgencyChanged?.Invoke(need, true);
 				needsReportedAsUrgent[(int)need] = true;
 			}
 		}
@@ -66,8 +66,12 @@ namespace BB.Buddies
 			needs[(int)need] += amount;
 			needs[(int)need] = Math.Clamp(needs[(int)need], 0, 100); //maybe min and top value aren't these later? todo
 			OnNeedsChanged?.Invoke(needs);
-			needsReportedAsUrgent[(int)need] = false;
-			if(needs[(int)need] >= 99)
+			if(needs[(int) need] > needUrgencyThresholds[(int)need])
+			{
+				OnNeedUrgencyChanged?.Invoke(need, false);
+				needsReportedAsUrgent[(int)need] = false;
+			}
+			if (needs[(int)need] >= 99)
 			{
 				OnNeedFullyRecovered?.Invoke(need);
 			}

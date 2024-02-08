@@ -25,12 +25,14 @@ namespace BB.Buddies
 		public void Initialize(Buddy buddy)
 		{
 			this.buddy = buddy;
-			this.buddy.OnNeedUrgent += OnNeedUrgent;
+			this.buddy.OnNeedUrgencyChanged += OnNeedUrgencyChanged;
 			SubscribeToTicks(TickTime.Large);
 		}
 
-		private void OnNeedUrgent(Need need)
+		private void OnNeedUrgencyChanged(Need need, bool urgent)
 		{
+			//here's where a queue comes in... this version will make the buddies go NUTS if they have all the stuff in urgent at the same time
+			//actionqueue :X?
 			BuddyEvents.OnClosestHealingStationRequested?.Invoke(need, transform.position, GoToStation);
 		}
 
@@ -48,6 +50,7 @@ namespace BB.Buddies
 		private void OnNeedFullyRecovered(Need need)
 		{
 			currentInteraction.StopInteraction(buddy);
+			currentInteraction = null;
 			buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
 		}
 
