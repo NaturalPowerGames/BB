@@ -5,6 +5,7 @@ public class ResourceInventoryManager : MonoBehaviour
 {
     [SerializeField]
     private int[] resources;
+
     private void OnEnable()
     {
         ResourceEvents.OnResourceCollected += OnResourceCollected;
@@ -14,6 +15,7 @@ public class ResourceInventoryManager : MonoBehaviour
     {
         ResourceEvents.OnResourceCollected += OnResourceCollected;
     }
+
     private void Awake()
     {
         resources = new int[Enum.GetNames(typeof(ResourceType)).Length];
