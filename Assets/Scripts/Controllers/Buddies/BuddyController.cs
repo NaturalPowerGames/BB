@@ -10,6 +10,7 @@ namespace BB.Buddies
 	{
 		private Buddy buddy;
 		private NavigationController navigationController;
+		private IInteractable currentInteraction;
 
 		private void Awake()
 		{
@@ -24,7 +25,7 @@ namespace BB.Buddies
 		public void Initialize(Buddy buddy)
 		{
 			this.buddy = buddy;
-			buddy.OnNeedUrgent += OnNeedUrgent;
+			this.buddy.OnNeedUrgent += OnNeedUrgent;
 			SubscribeToTicks(TickTime.Large);
 		}
 
@@ -38,7 +39,16 @@ namespace BB.Buddies
 			navigationController.MoveTo(station.GetLocation(),
 				() =>
 				{
+					buddy.OnNeedFullyRecovered += OnNeedFullyRecovered;
+					station.Interact(buddy);
+					currentInteraction = station;
 				});
+		}
+
+		private void OnNeedFullyRecovered(Need need)
+		{
+			currentInteraction.StopInteraction(buddy);
+			buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
 		}
 
 		public void SubscribeToTicks(TickTime tickTime)
