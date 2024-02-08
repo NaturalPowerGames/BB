@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using BB.Buddies;
 using UnityEngine.UI;
-using System;
 
 namespace BB.UI
 {

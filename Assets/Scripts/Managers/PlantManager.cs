@@ -31,7 +31,7 @@ namespace BB.Plants
 
         private void OnPlantHarvested(Plant plant)
         {
-            Debug.Log("harvest: " + plant.PlantName);
+            ResourceEvents.OnResourceCollected?.Invoke(plant.resourceType, 2);
         }
 
         private void OnPlantCreationRequested(Tile clickedTile)

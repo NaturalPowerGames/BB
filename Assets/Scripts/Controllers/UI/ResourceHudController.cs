@@ -1,0 +1,29 @@
+using UnityEngine;
+using TMPro;
+
+namespace BB.UI
+{
+    public class ResourceHudController : MonoBehaviour
+    {
+        [SerializeField]
+        private TextMeshProUGUI[] resources;
+
+        [SerializeField]
+        private GameObject background;
+
+        private void OnEnable()
+        {
+            HUDEvents.OnResourceInventoryUpdate+= OnResourceInventoryUpdate;
+        }
+
+        private void OnDisable()
+        {
+            HUDEvents.OnResourceInventoryUpdate += OnResourceInventoryUpdate;
+        }
+
+        private void OnResourceInventoryUpdate(ResourceType resourceType, int amount)
+        {
+            resources[(int)resourceType].text = amount.ToString();
+        }
+    }
+}
