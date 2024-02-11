@@ -12,6 +12,8 @@ namespace BB.Buddies
 		public float[] RatesPerTick;
 		[EnumNamedArray(typeof(Need))]
 		public float[] BaseNeeds;
+		[EnumNamedArray(typeof(Need))]
+		public float[] NeedsUrgencyThresholds;
 		public HabitatType PreferredHabitat;
 	}
 }
