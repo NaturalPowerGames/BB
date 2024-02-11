@@ -70,7 +70,7 @@ namespace BB.Hub
 		public void StopInteraction<T>(T other)
 		{
 			Buddy buddy = other as Buddy;
-			buddiesToRemove.Remove(buddy);
+			buddiesToRemove.Add(buddy);
 		}
 
 		private void Update()
