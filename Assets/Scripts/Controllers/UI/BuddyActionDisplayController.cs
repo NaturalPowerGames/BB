@@ -13,9 +13,18 @@ namespace BB.Buddies
 		private Transform needDisplaysParent;
 		private Image[] needDisplays; //this could probably be pooled in the future but it's premature optimization right now todo
 		private Dictionary<Need, bool> displayedNeeds = new Dictionary<Need, bool>();
-		
+		private Canvas canvas;
+
 		private void Awake()
 		{
+			SetupComponents();
+			ToggleVisuals(false);
+		}
+
+		private void SetupComponents()
+		{
+			canvas = GetComponent<Canvas>();
+			canvas.worldCamera = Camera.main;
 			needDisplays = needDisplaysParent.GetComponentsInChildren<Image>();
 		}
 
@@ -37,9 +46,12 @@ namespace BB.Buddies
 			}
 		}
 
-		private void Update()
+		private void ToggleVisuals(bool active)
 		{
-			needDisplaysParent.position = Camera.main.WorldToScreenPoint(transform.root.position);
+			foreach (var needDisplay in needDisplays)
+			{
+				needDisplay.gameObject.SetActive(active);
+			}
 		}
 	}
 }

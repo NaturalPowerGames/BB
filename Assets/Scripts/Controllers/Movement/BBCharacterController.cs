@@ -6,7 +6,7 @@ public class BBCharacterController : BaseCharacterController
 {
 	protected override void HandleInput()
 	{
-		base.HandleInput();
+		base.HandleInput();		
 		moveDirection = moveDirection.relativeTo(Camera.main.transform);
 	}
 }
