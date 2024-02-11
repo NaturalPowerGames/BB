@@ -8,7 +8,7 @@ namespace BB.Buddies
 	{
 		private float[] needs;
 		private float[] ratesPerTick;
-		private float[] needUrgencyThresholds;
+		private float[] needUrgencyThresholds, needSatisfyThresholds;
 		private bool[] needsReportedAsUrgent;
 		private bool hasHabitatAssigned;
 
@@ -23,7 +23,7 @@ namespace BB.Buddies
 		}
 
 		public Action<float[]> OnNeedsChanged;
-		public Action<Need,bool> OnNeedUrgencyChanged;
+		public Action<Need, bool> OnNeedUrgencyChanged;
 		public Action<Need> OnNeedFullyRecovered;
 		public BuddyType buddyType;
 
@@ -40,13 +40,14 @@ namespace BB.Buddies
 			}
 		}
 
-		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick, float[] needsUrgencyThresholds)
+		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick, float[] needsUrgencyThresholds, float[] needSatisfyThresholds)
 		{
 			this.buddyType = buddyType;
 			this.needs = needs.ToArray();
 			this.ratesPerTick = ratesPerTick.ToArray();
 			this.needUrgencyThresholds = needsUrgencyThresholds.ToArray();
 			this.needsReportedAsUrgent = new bool[needsUrgencyThresholds.Length];
+			this.needSatisfyThresholds = needSatisfyThresholds.ToArray();
 		}
 
 		public void DecreaseNeed(Need need)
@@ -62,14 +63,14 @@ namespace BB.Buddies
 		}
 
 		public void HealNeed(Need need, float amount)
-		{			
+		{
 			needs[(int)need] += amount;
 			needs[(int)need] = Math.Clamp(needs[(int)need], 0, 100); //maybe min and top value aren't these later? todo
 			OnNeedsChanged?.Invoke(needs);
-			if(needs[(int) need] > needUrgencyThresholds[(int)need])
+			if (!IsNeedUrgent(need))
 			{
 				OnNeedUrgencyChanged?.Invoke(need, false);
-				needsReportedAsUrgent[(int)need] = false;
+				needsReportedAsUrgent[(int)need] = !IsNeedSatisfied(need);
 			}
 			if (needs[(int)need] >= 99)
 			{
@@ -78,5 +79,6 @@ namespace BB.Buddies
 		}
 
 		private bool IsNeedUrgent(Need need) => needs[(int)need] < needUrgencyThresholds[(int)need];
+		private bool IsNeedSatisfied(Need need) => needs[(int)need] > needSatisfyThresholds[(int)need];
 	}
 }

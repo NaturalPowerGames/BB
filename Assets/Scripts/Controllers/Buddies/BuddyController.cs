@@ -34,6 +34,7 @@ namespace BB.Buddies
 		{
 			//here's where a queue comes in... this version will make the buddies go only to the latest need station if they have all the stuff in urgent at the same time
 			//actionqueue :X?
+			Debug.Log(urgent);
 			if(urgent)
 			BuddyEvents.OnClosestHealingStationRequested?.Invoke(need, transform.position, GoToStation);
 		}

@@ -16,7 +16,7 @@ public class NavigationController : MonoBehaviour
 	public void MoveTo(Vector3 position, Action onReached)
 	{
 		agent.SetDestination(position);
-		moving = true;
+		moving = true;	
 		this.onReached = onReached;
 	}
 
@@ -26,6 +26,8 @@ public class NavigationController : MonoBehaviour
 		{
 			moving = false;
 			onReached?.Invoke();
+			Debug.Log("!!!!");
+			onReached = null;
 		}
 	}
 }
