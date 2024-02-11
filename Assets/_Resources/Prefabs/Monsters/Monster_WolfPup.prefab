@@ -83,7 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938d3ec6331aa3f41a4253ed67225d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UITarget: {fileID: 0}
 --- !u!65 &435881392021022408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -216,6 +215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004671753638803659, guid: d1fb2e45fb5dc1f46866f29218448e50,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030040741
       objectReference: {fileID: 0}
     - target: {fileID: 4460148925301429346, guid: d1fb2e45fb5dc1f46866f29218448e50,
         type: 3}

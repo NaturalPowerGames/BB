@@ -10,7 +10,7 @@ namespace BB.Hub
 	{
 		public float healRate;
 		public Need healedNeed;
-		private List<Buddy> buddiesHealing = new List<Buddy>();
+		private List<Buddy> buddiesHealing = new List<Buddy>(), buddiesToRemove = new List<Buddy>();
 		private TickCounter tickCounter;
 		[SerializeField]
 		private Transform navigationTargetsParent; //this will become an array in the future so that the station can give out many slots and not have them overlap. Also to allow for the station to
@@ -48,11 +48,16 @@ namespace BB.Hub
 			{
 				buddy.HealNeed(healedNeed, healRate);
 			}
+			foreach (var buddy in buddiesToRemove)
+			{
+				buddiesHealing.Remove(buddy);
+			}			
+			buddiesToRemove.Clear();
 		}
 
 		public Vector3 GetLocation()
 		{
-			return navigationTargets[0].position; //will be a specified transform location, not the object's, in the future
+			return navigationTargets[0].position; //needs to be dynamic later
 		}
 
 		public bool Interact<T>(T other)
@@ -65,7 +70,7 @@ namespace BB.Hub
 		public void StopInteraction<T>(T other)
 		{
 			Buddy buddy = other as Buddy;
-			buddiesHealing.Remove(buddy);
+			buddiesToRemove.Remove(buddy);
 		}
 
 		private void Update()
