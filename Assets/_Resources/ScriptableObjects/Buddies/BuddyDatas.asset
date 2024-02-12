@@ -81,7 +81,7 @@ MonoBehaviour:
     - 100
     NeedsUrgencyThresholds:
     - 25
-    - 25
+    - 80
     - 25
     - 25
     - 25

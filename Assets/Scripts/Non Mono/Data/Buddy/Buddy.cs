@@ -11,6 +11,7 @@ namespace BB.Buddies
 		private float[] needUrgencyThresholds, needSatisfyThresholds;
 		private bool[] needsReportedAsUrgent;
 		private bool hasHabitatAssigned;
+		private bool isWorking;
 
 		private HabitatType currentHabitat;
 		public HabitatType CurrentHabitat
@@ -25,6 +26,7 @@ namespace BB.Buddies
 		public Action<float[]> OnNeedsChanged;
 		public Action<Need, bool> OnNeedUrgencyChanged;
 		public Action<Need> OnNeedFullyRecovered;
+		public Action OnRequestNewTask;
 		public BuddyType buddyType;
 
 		public float GetNeed(Need need)
@@ -48,6 +50,7 @@ namespace BB.Buddies
 			this.needUrgencyThresholds = needsUrgencyThresholds.ToArray();
 			this.needsReportedAsUrgent = new bool[needsUrgencyThresholds.Length];
 			this.needSatisfyThresholds = needSatisfyThresholds.ToArray();
+			this.isWorking = false;
 		}
 
 		public void DecreaseNeed(Need need)
