@@ -72,7 +72,7 @@ namespace BB.Hub
 
         private void HealNeed(Need need)
         {
-            station.HealNeed();
+            station.HealNeedAndHandleLists();
         }
 
         public void OnTicked()
