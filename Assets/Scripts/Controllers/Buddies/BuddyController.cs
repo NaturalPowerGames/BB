@@ -40,15 +40,14 @@ namespace BB.Buddies
 				ResourcesNeeded.Add(need);
 				if(!isBusy)
 				{
-					performNeedHealAction(need);
-
+					FindStation(need);
                 }
 			}
 		}
 
-		private void performNeedHealAction(Need need)
+		private void FindStation(Need need)
 		{
-            BuddyEvents.OnBuddyNeedsStation?.Invoke(need, transform.position, GoToStation);
+            BuddyEvents.OnNearestStationRequested?.Invoke(need, transform.position, GoToStation);
         }
 
 		private void GoToStation(IInteractable station)
@@ -73,7 +72,7 @@ namespace BB.Buddies
 
 			if(ResourcesNeeded.Count > 0)
 			{
-				BuddyEvents.OnBuddyNeedsStation?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
+				BuddyEvents.OnNearestStationRequested?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
             }
 		}
 

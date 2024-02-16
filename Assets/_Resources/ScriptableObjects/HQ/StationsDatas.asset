@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: StationsDatas
   m_EditorClassIdentifier: 
   data:
-  - reosurceType: 0
-  - reosurceType: 0
-  - reosurceType: 0
-  - reosurceType: 0
-  - reosurceType: 0
-  - reosurceType: 0
-  - reosurceType: 0
+  - need: 0
+    needRate: 0
+  - need: 1
+    needRate: 0
+  - need: 2
+    needRate: 0
+  - need: 3
+    needRate: 0
+  - need: 4
+    needRate: 0
+  - need: 5
+    needRate: 0
+  - need: 6
+    needRate: 0

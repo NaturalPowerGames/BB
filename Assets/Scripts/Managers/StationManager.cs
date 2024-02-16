@@ -22,13 +22,13 @@ public class StationManager : MonoBehaviour
     private void OnEnable()
     {
         HQEvents.OnWorkStationCreated += OnWorkStationCreated;
-        BuddyEvents.OnBuddyNeedsStation += OnBuddyNeedsStation;
+        BuddyEvents.OnNearestStationRequested += OnBuddyNeedsStation;
     }
 
     private void OnDisable()
     {
         HQEvents.OnWorkStationCreated -= OnWorkStationCreated;
-        BuddyEvents.OnBuddyNeedsStation -= OnBuddyNeedsStation;
+        BuddyEvents.OnNearestStationRequested -= OnBuddyNeedsStation;
     }
 
     private void OnWorkStationCreated(StationController workStationController)
@@ -48,7 +48,7 @@ public class StationManager : MonoBehaviour
 
         foreach (var stationController in workStations)
         {
-            if (stationController.getStationTaskType() == need)
+            if (stationController.GetStationTaskType() == need)
             {
                 float distance = Vector3.Distance(stationController.transform.position, position);
                 if (distance < closestDistance)
@@ -58,19 +58,18 @@ public class StationManager : MonoBehaviour
                 }
             }
         }
-
         return closestStation;
     }
 
     private void SpawnStationsAtLocation()
     {
-        var DrinkingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Water], new Vector3(1, 0.5f, 1), Quaternion.identity);
-        DrinkingStationController.Initialize(new Station(stationDatas.data[(int)Need.Water].need, stationDatas.data[(int)Need.Water].needRate));
+        var drinkingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Water], new Vector3(1, 0.5f, 1), Quaternion.identity);
+        drinkingStationController.Initialize(new Station(stationDatas.data[(int)Need.Water].need, stationDatas.data[(int)Need.Water].needRate));
 
-        var EatingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Food], new Vector3(-10,0.5f, -10), Quaternion.identity);
-        EatingStationController.Initialize(new Station(stationDatas.data[(int)Need.Food].need, stationDatas.data[(int)Need.Food].needRate));
+        var eatingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Food], new Vector3(-10,0.5f, -10), Quaternion.identity);
+        eatingStationController.Initialize(new Station(stationDatas.data[(int)Need.Food].need, stationDatas.data[(int)Need.Food].needRate));
 
-        var logginStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Logging], new Vector3(10, 1, 10), Quaternion.identity);
-        logginStationController.Initialize(new Station(stationDatas.data[(int)Need.Logging].need, stationDatas.data[(int)Need.Logging].needRate));
+        var loggingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Logging], new Vector3(10, 1, 10), Quaternion.identity);
+        loggingStationController.Initialize(new Station(stationDatas.data[(int)Need.Logging].need, stationDatas.data[(int)Need.Logging].needRate));
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1146,7 +1146,6 @@ GameObject:
   - component: {fileID: 1752849824}
   - component: {fileID: 1752849823}
   - component: {fileID: 1752849825}
-  - component: {fileID: 1752849826}
   - component: {fileID: 1752849827}
   - component: {fileID: 1752849828}
   - component: {fileID: 1752849829}
@@ -1199,23 +1198,9 @@ MonoBehaviour:
   dataContainer: {fileID: 11400000, guid: f88da74838dd0e547aa5871b20d5b0d2, type: 2}
   buddyPrefabs: {fileID: 11400000, guid: f7f2c398d14b2d444a40b4c92e5e367f, type: 2}
   testBuddySpawnLocation: {fileID: 852440331}
---- !u!114 &1752849826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752849822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12dbbdf20ef847046a3b2e5db0e3f61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healingStations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  testBuddySpawnLocation2: {fileID: 0}
+  testBuddySpawnLocation3: {fileID: 0}
+  testBuddySpawnLocation4: {fileID: 0}
 --- !u!114 &1752849827
 MonoBehaviour:
   m_ObjectHideFlags: 0

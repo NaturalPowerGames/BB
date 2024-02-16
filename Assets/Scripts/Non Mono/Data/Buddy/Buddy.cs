@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 
 namespace BB.Buddies
@@ -11,7 +10,6 @@ namespace BB.Buddies
 		private float[] ratesPerTick;
 		private float[] needUrgencyThresholds, needSatisfyThresholds;
 		private bool[] needsReportedAsUrgent;
-		private bool hasHabitatAssigned;
 		public bool isWorking;
 
 		private HabitatType currentHabitat;
@@ -40,6 +38,7 @@ namespace BB.Buddies
             this.needSatisfyThresholds = needSatisfyThresholds.ToArray();
             this.isWorking = false;
         }
+
         public float GetNeed(Need need)
 		{
 			return needs[(int)need];
@@ -52,7 +51,6 @@ namespace BB.Buddies
 				DecreaseNeed((Need)i);
 			}
 		}
-
 
 		public void DecreaseNeed(Need need)
 		{

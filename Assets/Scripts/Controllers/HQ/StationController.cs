@@ -35,7 +35,7 @@ namespace BB.Hub
 
         private void Start()
         {
-            HQEvents.OnWorkStationCreated(this);
+            HQEvents.OnWorkStationCreated?.Invoke(this);
         }
 
         public Vector3 GetLocation()
@@ -48,7 +48,7 @@ namespace BB.Hub
             Debug.Log("interacting");
             Buddy buddy = other as Buddy;
             station.AddBuddyToStation(buddy);
-            SubscribeToTicks(TickTime.Large);
+            SubscribeToTicks(TickTime.Large); //when there's more than 1 buddy in ANY station, this needs to go out
             return true; // if the station is full, it won't allow interactions
         }
 
@@ -57,37 +57,37 @@ namespace BB.Hub
             Debug.Log("stop interacting");
             Buddy buddy = other as Buddy;
             station.RemoveBuddyFromStation(buddy);
-            StopNeedHeallingTick(TickTime.Large);
-   
+            StopNeedHealingTick(TickTime.Large);   //needs to check if the station is actually empty
         }
+
         public void SubscribeToTicks(TickTime tickTime)
         {
             TimeEvents.OnRegisterTickListenerRequested?.Invoke(this, tickTime);
         }
 
-        public void StopNeedHeallingTick(TickTime tickTime)
+        public void StopNeedHealingTick(TickTime tickTime)
         {
             TimeEvents.OnRemoveTickListenerRequested?.Invoke(this, tickTime);
         }
 
-        private void healNeed(Need need)
+        private void HealNeed(Need need)
         {
-            station.healBuddiesNeeds();
+            station.HealNeed();
         }
 
         public void OnTicked()
         {
-            healNeed(station.getNeed());
+            HealNeed(station.GetNeed());
         }
 
         private void OnResourceCollected(ResourceType resourceType)
         {
-            ResourceEvents.OnResourceCollected(resourceType, 2);
+            ResourceEvents.OnResourceCollected?.Invoke(resourceType, 2);
         }
 
-        public Need getStationTaskType()
+        public Need GetStationTaskType()
         {
-            return station.getNeed();
+            return station.GetNeed();
         }
     }
 }

@@ -9,13 +9,13 @@ namespace BB.Buddies
 		Sleep,
 		Social,
 		Comfort,
-		Logging,
-		Mining,
+		Logging, 
+		Mining, 
 	}
 
     public enum Resource
     {
-        Wood,
+        Wood, //these are already needs, no need for Logging / Mining
         Stone,
     }
 

@@ -13,9 +13,9 @@ namespace BB.Stations
         private Need need;
         private float needRate;
         [SerializeField]
-        private List<Buddy> buddiesWorking = new List<Buddy>(), buddiesToRemove = new List<Buddy>();
+        private List<Buddy> buddiesWorking = new List<Buddy>();
 
-        public Need getNeed()
+        public Need GetNeed()
         {
             return need;
         }
@@ -37,21 +37,20 @@ namespace BB.Stations
             buddiesWorking.Remove(buddy);
         }
 
-        public bool isEmpty()
+        public bool IsEmpty() //will be changed to account for number of slots in the station
         {
             Debug.Log("Station: " + need + " " + buddiesWorking.Count);
             return buddiesWorking.Count < 1;
         }
 
-        public void healBuddiesNeeds()
-        {
-            var buddiesWorkingCopy = new List<Buddy>(buddiesWorking);
-            foreach (var buddy in buddiesWorkingCopy)
-            {
-                buddy.HealNeed(need, resourceRate);
-            }
-            buddiesWorking = buddiesWorkingCopy;
-
-        }
-    }
+		public void HealNeed() 
+		{
+			var buddiesWorkingCopy = new List<Buddy>(buddiesWorking); //needs a rework
+			foreach (var buddy in buddiesWorkingCopy)
+			{
+				buddy.HealNeed(need, resourceRate);
+			}
+			buddiesWorking = buddiesWorkingCopy;
+		}
+	}
 }
