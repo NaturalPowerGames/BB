@@ -15,16 +15,22 @@ namespace BB.TimeManagement
 		private void OnEnable()
 		{
 			TimeEvents.OnRegisterTickListenerRequested += OnTickerRequested;
+			TimeEvents.OnRemoveTickListenerRequested += OnRemoveTickerRequested;
 	    }
 
 		private void OnDisable()
 		{
 			TimeEvents.OnRegisterTickListenerRequested -= OnTickerRequested;
+			TimeEvents.OnRemoveTickListenerRequested -= OnRemoveTickerRequested;
 		}
 
 		private void OnTickerRequested(ITickListener listener, TickTime tickTime)
 		{
 			tickCounters[(int)tickTime].OnTicked += listener.OnTicked;
+		}
+		private void OnRemoveTickerRequested(ITickListener listener, TickTime tickTime)
+		{
+			tickCounters[(int)tickTime].OnTicked -= listener.OnTicked;
 		}
 
 		private void SetupTickCounters()

@@ -26,7 +26,6 @@ public class NavigationController : MonoBehaviour
 		{
 			moving = false;
 			onReached?.Invoke();
-			Debug.Log("!!!!");
 			onReached = null;
 		}
 	}

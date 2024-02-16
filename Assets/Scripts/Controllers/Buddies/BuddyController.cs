@@ -1,6 +1,5 @@
-using BB.Hub;
 using BB.TimeManagement;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,9 +7,13 @@ namespace BB.Buddies
 {
 	public class BuddyController : MonoBehaviour, IPointerDownHandler, ITickListener
 	{
-		private Buddy buddy;
+        private Buddy buddy;
 		private NavigationController navigationController;
+		[SerializeField]
 		private IInteractable currentInteraction;
+		private bool isBusy = false;
+		[SerializeField]
+		public List<Need> ResourcesNeeded = new List<Need>();
 
 		private void Awake()
 		{
@@ -32,12 +35,20 @@ namespace BB.Buddies
 
 		private void OnNeedUrgencyChanged(Need need, bool urgent)
 		{
-			//here's where a queue comes in... this version will make the buddies go only to the latest need station if they have all the stuff in urgent at the same time
-			//actionqueue :X?
-			Debug.Log(urgent);
-			if(urgent)
-			BuddyEvents.OnClosestHealingStationRequested?.Invoke(need, transform.position, GoToStation);
+			if (urgent && !ResourcesNeeded.Contains(need))
+			{
+				ResourcesNeeded.Add(need);
+				if(!isBusy)
+				{
+					FindStation(need);
+                }
+			}
 		}
+
+		private void FindStation(Need need)
+		{
+            BuddyEvents.OnNearestStationRequested?.Invoke(need, transform.position, GoToStation);
+        }
 
 		private void GoToStation(IInteractable station)
 		{
@@ -46,6 +57,7 @@ namespace BB.Buddies
 				{
 					buddy.OnNeedFullyRecovered += OnNeedFullyRecovered;
 					station.Interact(buddy);
+					isBusy = true;
 					currentInteraction = station;
 				});
 		}
@@ -54,8 +66,16 @@ namespace BB.Buddies
 		{
 			currentInteraction?.StopInteraction(buddy);
 			currentInteraction = null;
-			buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
+            isBusy = false;
+			ResourcesNeeded.Remove(need);
+            buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
+
+			if(ResourcesNeeded.Count > 0)
+			{
+				BuddyEvents.OnNearestStationRequested?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
+            }
 		}
+
 
 		public void SubscribeToTicks(TickTime tickTime)
 		{
@@ -65,6 +85,6 @@ namespace BB.Buddies
 		public void OnTicked()
 		{
 			buddy.DecreaseAllNeeds();
-		}
+        }
 	}
 }

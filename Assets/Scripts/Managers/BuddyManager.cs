@@ -10,10 +10,11 @@ namespace BB.Buddies
 		private BuddyPrefabs buddyPrefabs;
 		[SerializeField]
 		private Transform testBuddySpawnLocation; //remove after testing;
+       
 
-		private void Start()
+        private void Start()
 		{
-			SpawnBuddyAtLocation(BuddyType.WolfPup, testBuddySpawnLocation.position);
+			SpawnBuddyAtLocation(BuddyType.WolfPup, testBuddySpawnLocation.position);		
 		}
 
 		private void SpawnBuddyAtLocation(BuddyType buddyType, Vector3 position)
