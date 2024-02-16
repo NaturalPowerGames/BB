@@ -30,7 +30,6 @@ namespace BB.TimeManagement
 		}
 		private void OnRemoveTickerRequested(ITickListener listener, TickTime tickTime)
 		{
-			Debug.Log("removing");
 			tickCounters[(int)tickTime].OnTicked -= listener.OnTicked;
 		}
 

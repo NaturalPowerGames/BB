@@ -2,5 +2,6 @@ public enum ResourceType
 {
     Wood,
     Rock,
-    Pipe
+    Pipe,
+    Water
 }

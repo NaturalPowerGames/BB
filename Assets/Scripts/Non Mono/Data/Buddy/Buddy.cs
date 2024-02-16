@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace BB.Buddies
@@ -11,7 +12,7 @@ namespace BB.Buddies
 		private float[] needUrgencyThresholds, needSatisfyThresholds;
 		private bool[] needsReportedAsUrgent;
 		private bool hasHabitatAssigned;
-		private bool isWorking;
+		public bool isWorking;
 
 		private HabitatType currentHabitat;
 		public HabitatType CurrentHabitat
@@ -29,7 +30,17 @@ namespace BB.Buddies
 		public Action OnRequestNewTask;
 		public BuddyType buddyType;
 
-		public float GetNeed(Need need)
+        public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick, float[] needsUrgencyThresholds, float[] needSatisfyThresholds)
+        {
+            this.buddyType = buddyType;
+            this.needs = needs.ToArray();
+            this.ratesPerTick = ratesPerTick.ToArray();
+            this.needUrgencyThresholds = needsUrgencyThresholds.ToArray();
+            this.needsReportedAsUrgent = new bool[needsUrgencyThresholds.Length];
+            this.needSatisfyThresholds = needSatisfyThresholds.ToArray();
+            this.isWorking = false;
+        }
+        public float GetNeed(Need need)
 		{
 			return needs[(int)need];
 		}
@@ -42,16 +53,6 @@ namespace BB.Buddies
 			}
 		}
 
-		public Buddy(BuddyType buddyType, float[] needs, float[] ratesPerTick, float[] needsUrgencyThresholds, float[] needSatisfyThresholds)
-		{
-			this.buddyType = buddyType;
-			this.needs = needs.ToArray();
-			this.ratesPerTick = ratesPerTick.ToArray();
-			this.needUrgencyThresholds = needsUrgencyThresholds.ToArray();
-			this.needsReportedAsUrgent = new bool[needsUrgencyThresholds.Length];
-			this.needSatisfyThresholds = needSatisfyThresholds.ToArray();
-			this.isWorking = false;
-		}
 
 		public void DecreaseNeed(Need need)
 		{

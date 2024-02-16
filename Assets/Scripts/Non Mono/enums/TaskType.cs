@@ -3,5 +3,8 @@ public enum TaskType
 	Logging,
 	Mining,
 	Coocking,
-	Pipeing
+	Pipeing,
+	Drinking,
+	Eating,
+	Sleeping
 }

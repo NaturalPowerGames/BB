@@ -1,6 +1,4 @@
-using BB.Hub;
 using BB.TimeManagement;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,16 +7,17 @@ namespace BB.Buddies
 {
 	public class BuddyController : MonoBehaviour, IPointerDownHandler, ITickListener
 	{
-		private Buddy buddy;
+        private Buddy buddy;
 		private NavigationController navigationController;
 		[SerializeField]
 		private IInteractable currentInteraction;
-		private bool isWorking = false;
+		private bool isBusy = false;
+		[SerializeField]
+		public List<Need> ResourcesNeeded = new List<Need>();
 
 		private void Awake()
 		{
 			navigationController = GetComponent<NavigationController>();
-
 		}
 
 		public void OnPointerDown(PointerEventData eventData)
@@ -36,18 +35,22 @@ namespace BB.Buddies
 
 		private void OnNeedUrgencyChanged(Need need, bool urgent)
 		{
-			//here's where a queue comes in... this version will make the buddies go only to the latest need station if they have all the stuff in urgent at the same time
-			//actionqueue :X?
-			if (urgent)
+			if (urgent && !ResourcesNeeded.Contains(need))
 			{
-				BuddyEvents.OnClosestHealingStationRequested?.Invoke(need, transform.position, GoToStation);
-				ResourceEvents.OnStopCollecting?.Invoke(TickTime.Large);
+				ResourcesNeeded.Add(need);
+				if(!isBusy)
+				{
+					performNeedHealAction(need);
+
+                }
 			}
-			if (!isWorking && !urgent)
-			{
-				BuddyEvents.OnBuddyWantsToWork?.Invoke(ResourceType.Wood, transform.position, GoToWork);
-			}
+			//ResourceEvents.OnStopCollecting?.Invoke(TickTime.Large);
 		}
+
+		private void performNeedHealAction(Need need)
+		{
+            BuddyEvents.OnBuddyNeedsStation?.Invoke(need, transform.position, GoToStation);
+        }
 
 		private void GoToStation(IInteractable station)
 		{
@@ -56,15 +59,7 @@ namespace BB.Buddies
 				{
 					buddy.OnNeedFullyRecovered += OnNeedFullyRecovered;
 					station.Interact(buddy);
-					currentInteraction = station;
-				});
-		}
-		private void GoToWork(IInteractable station)
-		{
-			navigationController.MoveTo(station.GetLocation(),
-				() =>
-				{
-					station.Interact(buddy);
+					isBusy = true;
 					currentInteraction = station;
 				});
 		}
@@ -73,7 +68,14 @@ namespace BB.Buddies
 		{
 			currentInteraction?.StopInteraction(buddy);
 			currentInteraction = null;
-			buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
+            isBusy = false;
+			ResourcesNeeded.Remove(need);
+            buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
+
+			if(ResourcesNeeded.Count > 0)
+			{
+				BuddyEvents.OnBuddyNeedsStation?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
+            }
 		}
 
 
@@ -86,6 +88,5 @@ namespace BB.Buddies
 		{
 			buddy.DecreaseAllNeeds();
         }
-
 	}
 }

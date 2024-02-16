@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51fbadccee3485a4cb8b1b4d2bb43aae, type: 3}
+  m_Name: StationsPrefabs
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 5636998956879288466, guid: a74cf5a44f9347d46bdd54995a25ed86, type: 3}
+  - {fileID: 5636998956879288466, guid: cd6cbd216e5117e43b00e8e46586f8f8, type: 3}
+  - {fileID: 5636998956879288466, guid: 56057d21300bbe9418bb000c3a0a4091, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7936514507603933372, guid: 5aa3f0eda707a1540b8ce61c8b38c915, type: 3}
+  - {fileID: 0}
