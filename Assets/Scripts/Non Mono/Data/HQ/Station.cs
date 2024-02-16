@@ -7,17 +7,23 @@ namespace BB.Stations
     [System.Serializable]
     public class Station
     {
-        public float resourceRate;
-        public TaskType taskType;
-        public ResourceType resourceType;
-        public Need need;
+        private float resourceRate;
+        private TaskType taskType;
+        private ResourceType resourceType;
+        private Need need;
+        private float needRate;
         [SerializeField]
         private List<Buddy> buddiesWorking = new List<Buddy>(), buddiesToRemove = new List<Buddy>();
 
+        public Need getNeed()
+        {
+            return need;
+        }
 
-        public Station(Need need)
+        public Station(Need need, float needRate)
         {
             this.need = need;
+            this.needRate = needRate;
             resourceRate = 5;
         }
 

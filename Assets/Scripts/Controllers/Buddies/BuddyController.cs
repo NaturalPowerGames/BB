@@ -44,7 +44,6 @@ namespace BB.Buddies
 
                 }
 			}
-			//ResourceEvents.OnStopCollecting?.Invoke(TickTime.Large);
 		}
 
 		private void performNeedHealAction(Need need)

@@ -13,6 +13,5 @@ namespace BB.Buddies
 		public static Action<Buddy> OnBuddyBorn;
 		public static Action<Buddy> OnBuddySelected;
 		public static Action<Need, Vector3, Action<IInteractable>> OnBuddyNeedsStation;
-		public static Action<Need, Vector3, Action<IInteractable>> OnClosestHealingStationRequested; // this needs to be removed
 	}
 }

@@ -9,5 +9,5 @@ namespace BB.Stations
 	{
 		[EnumNamedArray(typeof(Need))]
 		public List<StationData> data;
-	}
+    }
 }

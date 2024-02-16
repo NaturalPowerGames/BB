@@ -8,7 +8,6 @@ namespace BB.Hub
     public class StationController : MonoBehaviour, IInteractable, ITickListener
     {
         private Station station;
-
         [SerializeField]
         private Transform navigationTargetsParent;
         [SerializeField]
@@ -78,8 +77,7 @@ namespace BB.Hub
 
         public void OnTicked()
         {
-            healNeed(station.need);
-            //OnResourceCollected(ResourceType.Wood);
+            healNeed(station.getNeed());
         }
 
         private void OnResourceCollected(ResourceType resourceType)
@@ -89,7 +87,7 @@ namespace BB.Hub
 
         public Need getStationTaskType()
         {
-            return station.need;
+            return station.getNeed();
         }
     }
 }

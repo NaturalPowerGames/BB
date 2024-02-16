@@ -64,11 +64,13 @@ public class StationManager : MonoBehaviour
 
     private void SpawnStationsAtLocation()
     {
-        var logginStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Water], new Vector3(1, 1, 1), Quaternion.identity);
-        logginStationController.Initialize(new Station(Need.Water));
-        var waterStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Food], new Vector3(5, 1, 5), Quaternion.identity);
-        waterStationController.Initialize(new Station(Need.Food));
-        var LoggingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Logging], new Vector3(-5, 1, -5), Quaternion.identity);
-        LoggingStationController.Initialize(new Station(Need.Logging));
+        var DrinkingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Water], new Vector3(1, 0.5f, 1), Quaternion.identity);
+        DrinkingStationController.Initialize(new Station(stationDatas.data[(int)Need.Water].need, stationDatas.data[(int)Need.Water].needRate));
+
+        var EatingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Food], new Vector3(-10,0.5f, -10), Quaternion.identity);
+        EatingStationController.Initialize(new Station(stationDatas.data[(int)Need.Food].need, stationDatas.data[(int)Need.Food].needRate));
+
+        var logginStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Logging], new Vector3(10, 1, 10), Quaternion.identity);
+        logginStationController.Initialize(new Station(stationDatas.data[(int)Need.Logging].need, stationDatas.data[(int)Need.Logging].needRate));
     }
 }

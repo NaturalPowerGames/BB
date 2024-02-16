@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3117385618854289197}
-  - component: {fileID: 8682169323942860159}
   - component: {fileID: 5636998956879288466}
   m_Layer: 0
   m_Name: WaterStation
@@ -66,21 +65,6 @@ Transform:
   - {fileID: 2145523697795293572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8682169323942860159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3138589581205855493}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e18ff56f80cac140803adb6e0263415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healRate: 5
-  healedNeed: 1
-  navigationTargetsParent: {fileID: 4765224596706237456}
 --- !u!114 &5636998956879288466
 MonoBehaviour:
   m_ObjectHideFlags: 0

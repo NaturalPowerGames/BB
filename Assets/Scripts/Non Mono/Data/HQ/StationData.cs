@@ -1,9 +1,11 @@
+using BB.Buddies;
+
 namespace BB.Stations
 {
 	[System.Serializable]
 	public class StationData
 	{
-		[EnumNamedArray(typeof(ResourceType))]
-		public ResourceType reosurceType;
+		public Need need;
+		public float needRate;
 	}
 }
