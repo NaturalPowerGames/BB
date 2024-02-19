@@ -80,7 +80,7 @@ namespace BB.Hub
             HealNeed(station.GetNeed());
         }
 
-        private void OnResourceCollected(ResourceType resourceType)
+        private void OnResourceCollected(GatheringType resourceType)
         {
             ResourceEvents.OnResourceCollected?.Invoke(resourceType, 2);
         }

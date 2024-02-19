@@ -2,5 +2,5 @@ using System;
 
 public class HUDEvents
 {
-    public static Action<ResourceType, int> OnResourceInventoryUpdate;
+    public static Action<GatheringType, int> OnResourceInventoryUpdate;
 }

@@ -21,7 +21,7 @@ namespace BB.UI
             HUDEvents.OnResourceInventoryUpdate += OnResourceInventoryUpdate;
         }
 
-        private void OnResourceInventoryUpdate(ResourceType resourceType, int amount)
+        private void OnResourceInventoryUpdate(GatheringType resourceType, int amount)
         {
             resources[(int)resourceType].text = amount.ToString();
         }

@@ -21,7 +21,8 @@ namespace BB.Buddies
 		{
 			var buddy = Instantiate(buddyPrefabs.prefabs[(int)buddyType], position, Quaternion.identity);
 			var buddyData = dataContainer.data[(int)buddyType];
-			buddy.Initialize(new Buddy(buddyType, buddyData.BaseNeeds, buddyData.RatesPerTick, buddyData.NeedsUrgencyThresholds, buddyData.NeedsSatisfyThresholds));
+			var needs = new Needs(buddyData.BaseNeeds, buddyData.RatesPerTick, buddyData.NeedsUrgencyThresholds, buddyData.NeedsSatisfyThresholds);
+			buddy.Initialize(new Buddy(buddyType, needs, work));
 		}
 	}
 }

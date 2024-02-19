@@ -9,7 +9,7 @@ namespace BB.Stations
     {
         private float resourceRate;
         private TaskType taskType;
-        private ResourceType resourceType;
+        private GatheringType resourceType;
         private Need need;
         private float needRate;
         [SerializeField]
