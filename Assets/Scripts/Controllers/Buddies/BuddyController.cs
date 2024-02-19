@@ -28,7 +28,7 @@ namespace BB.Buddies
 		public void Initialize(Buddy buddy)
 		{
 			this.buddy = buddy;
-			this.buddy.OnNeedUrgencyChanged += OnNeedUrgencyChanged;
+			this.buddy.Needs.OnNeedUrgencyChanged += OnNeedUrgencyChanged;
 			SubscribeToTicks(TickTime.Large);
 			GetComponentInChildren<BuddyActionDisplayController>().Initialize(buddy); //is this the right place? I guess?
 		}
@@ -55,7 +55,7 @@ namespace BB.Buddies
 			navigationController.MoveTo(station.GetLocation(),
 				() =>
 				{
-					buddy.OnNeedFullyRecovered += OnNeedFullyRecovered;
+					buddy.Needs.OnNeedFullyRecovered += OnNeedFullyRecovered;
 					station.Interact(buddy);
 					isBusy = true;
 					currentInteraction = station;
@@ -68,14 +68,13 @@ namespace BB.Buddies
 			currentInteraction = null;
             isBusy = false;
 			ResourcesNeeded.Remove(need);
-            buddy.OnNeedFullyRecovered -= OnNeedFullyRecovered;
+            buddy.Needs.OnNeedFullyRecovered -= OnNeedFullyRecovered;
 
 			if(ResourcesNeeded.Count > 0)
 			{
 				BuddyEvents.OnNearestStationRequested?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
             }
 		}
-
 
 		public void SubscribeToTicks(TickTime tickTime)
 		{
@@ -84,7 +83,8 @@ namespace BB.Buddies
 
 		public void OnTicked()
 		{
-			buddy.DecreaseAllNeeds();
+			buddy.Needs.DecreaseAllNeeds();
+			buddy.Work.NotWorkingMotivationBaseHeal();
         }
 	}
 }

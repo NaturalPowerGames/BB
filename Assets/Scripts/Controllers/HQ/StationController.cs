@@ -22,7 +22,7 @@ namespace BB.Hub
             }
         }
 
-        public Transform GetFirstFreeNavTarget()
+        public Transform GetFirstFreeNavigationTarget()
         {
             return navigationTargets != null && navigationTargets.Length > 0 ? navigationTargets[0] : null;
         }
@@ -40,13 +40,13 @@ namespace BB.Hub
 
         public Vector3 GetLocation()
         {
-            return GetFirstFreeNavTarget().position;
+            return GetFirstFreeNavigationTarget().position;
         }
  
         public bool Interact<T>(T other)
         {
-            Debug.Log("interacting");
             Buddy buddy = other as Buddy;
+            Debug.Log($"{buddy.buddyType}: Interacting");
             station.AddBuddyToStation(buddy);
             SubscribeToTicks(TickTime.Large); //when there's more than 1 buddy in ANY station, this needs to go out
             return true; // if the station is full, it won't allow interactions
@@ -54,8 +54,8 @@ namespace BB.Hub
 
         public void StopInteraction<T>(T other)
         {
-            Debug.Log("stop interacting");
             Buddy buddy = other as Buddy;
+            Debug.Log($"{buddy.buddyType}: Stop interacting");
             station.RemoveBuddyFromStation(buddy);
             StopNeedHealingTick(TickTime.Large);   //needs to check if the station is actually empty
         }
@@ -70,24 +70,13 @@ namespace BB.Hub
             TimeEvents.OnRemoveTickListenerRequested?.Invoke(this, tickTime);
         }
 
-        private void HealNeed(Need need)
-        {
-            station.HealNeedAndHandleLists();
-        }
-
         public void OnTicked()
         {
-            HealNeed(station.GetNeed());
+            station.PerformInteractionEffect();
         }
 
         private void OnResourceCollected(GatheringType resourceType)
         {
-            ResourceEvents.OnResourceCollected?.Invoke(resourceType, 2);
-        }
-
-        public Need GetStationTaskType()
-        {
-            return station.GetNeed();
         }
     }
 }
