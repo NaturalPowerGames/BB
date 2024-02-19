@@ -146,9 +146,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2208232407288118607}
-  - component: {fileID: 7936514507603933372}
+  - component: {fileID: -3542609038246684752}
   m_Layer: 0
-  m_Name: LoggingStation
+  m_Name: WoodStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ Transform:
   - {fileID: 274914290689806679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7936514507603933372
+--- !u!114 &-3542609038246684752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5931426864881978832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7429bb7561d0d4fab66f9464dfe2ab, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c8c8df9a7ae964bbc6353bfe9366cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   navigationTargetsParent: {fileID: 274914290689806679}

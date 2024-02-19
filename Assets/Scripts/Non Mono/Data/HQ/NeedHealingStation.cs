@@ -1,6 +1,5 @@
 using BB.Buddies;
-using System.Collections;
-using System.Collections.Generic;
+
 namespace BB.Stations
 {
 	public class NeedHealingStation : Station
@@ -18,6 +17,12 @@ namespace BB.Stations
 				buddy.Needs.HealNeed(need, interactionBenefitRate);
 			}
 			base.PerformInteractionEffect();
+		}
+
+		public NeedHealingStation(Need need, float rate)
+		{
+			this.need = need;
+			this.interactionBenefitRate = rate;
 		}
 	}
 }

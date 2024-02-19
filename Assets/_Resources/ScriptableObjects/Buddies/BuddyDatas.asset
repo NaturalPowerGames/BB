@@ -15,79 +15,63 @@ MonoBehaviour:
   data:
   - PreferredHabitat: 1
     BaseAbilityScores: 01000000010000000100000001000000
-    RatesPerTick:
-    - 0.1
-    - 0.1
-    - 0.1
-    - 0.1
-    - 0.1
-    BaseNeeds:
-    - 100
-    - 100
-    - 100
-    - 100
-    - 100
-    NeedsUrgencyThresholds:
-    - 25
-    - 25
-    - 25
-    - 25
-    - 25
-    NeedsSatisfyThresholds:
-    - 50
-    - 50
-    - 50
-    - 50
-    - 50
+    NeedData:
+      RatesPerTick: []
+      BaseNeeds: []
+      NeedsUrgencyThresholds: []
+      NeedsSatisfyThresholds: []
+    WorkData:
+      BaseMotivation: 0
+      MotivationDepletionRate: 0
+      MotivationIncreaseRate: 0
+      MinimumMotivationRequiredToWork: 0
+      WorkPreferences: []
   - PreferredHabitat: 2
     BaseAbilityScores: 01000000010000000100000001000000
-    RatesPerTick:
-    - 0.001
-    - 2
-    - 0.001
-    - 0.001
-    - 0.001
-    BaseNeeds:
-    - 99.991005
-    - 100
-    - 100
-    - 100
-    - 100
-    NeedsUrgencyThresholds:
-    - 25
-    - 25
-    - 25
-    - 25
-    - 25
-    NeedsSatisfyThresholds:
-    - 50
-    - 50
-    - 50
-    - 50
-    - 50
+    NeedData:
+      RatesPerTick: []
+      BaseNeeds: []
+      NeedsUrgencyThresholds: []
+      NeedsSatisfyThresholds: []
+    WorkData:
+      BaseMotivation: 0
+      MotivationDepletionRate: 0
+      MotivationIncreaseRate: 0
+      MinimumMotivationRequiredToWork: 0
+      WorkPreferences: []
   - PreferredHabitat: 2
     BaseAbilityScores: 01000000010000000100000001000000
-    RatesPerTick:
-    - 0.001
-    - 2
-    - 0.001
-    - 0.001
-    - 0.001
-    BaseNeeds:
-    - 100
-    - 100
-    - 100
-    - 100
-    - 100
-    NeedsUrgencyThresholds:
-    - 25
-    - 80
-    - 25
-    - 25
-    - 25
-    NeedsSatisfyThresholds:
-    - 50
-    - 50
-    - 50
-    - 50
-    - 50
+    NeedData:
+      RatesPerTick:
+      - 0.1
+      - 10
+      - 0.1
+      - 0.1
+      - 0.1
+      BaseNeeds:
+      - 100
+      - 100
+      - 100
+      - 100
+      - 100
+      NeedsUrgencyThresholds:
+      - 20
+      - 20
+      - 20
+      - 20
+      - 20
+      NeedsSatisfyThresholds:
+      - 50
+      - 50
+      - 50
+      - 50
+      - 50
+    WorkData:
+      BaseMotivation: 100
+      MotivationDepletionRate: 5
+      MotivationIncreaseRate: 5
+      MinimumMotivationRequiredToWork: 50
+      WorkPreferences:
+      - 5
+      - 50
+      - 100

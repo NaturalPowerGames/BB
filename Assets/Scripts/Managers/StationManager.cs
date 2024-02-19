@@ -93,8 +93,8 @@ public class StationManager : MonoBehaviour
 
 	private void SpawnStationsAtLocation()
     {
-    //    var drinkingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Water], new Vector3(1, 0.5f, 1), Quaternion.identity);
-    //    drinkingStationController.Initialize(new Station(stationDatas.data[(int)Need.Water].need, stationDatas.data[(int)Need.Water].needRate));
+        var drinkingStationController = Instantiate(stationPrefabs.needHealingStationPrefabs[(int)Need.Water], new Vector3(1, 0.5f, 1), Quaternion.identity);
+        drinkingStationController.Initialize(new NeedHealingStation(Need.Water, stationDatas.data[(int)Need.Water].needRate));
 
     //    var eatingStationController = Instantiate(stationPrefabs.prefabs[(int)Need.Food], new Vector3(-10,0.5f, -10), Quaternion.identity);
     //    eatingStationController.Initialize(new Station(stationDatas.data[(int)Need.Food].need, stationDatas.data[(int)Need.Food].needRate));

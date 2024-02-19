@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3117385618854289197}
-  - component: {fileID: 5636998956879288466}
+  - component: {fileID: 2241864653651613701}
   m_Layer: 0
   m_Name: FoodStation
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 2145523697795293572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5636998956879288466
+--- !u!114 &2241864653651613701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3138589581205855493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7429bb7561d0d4fab66f9464dfe2ab, type: 3}
+  m_Script: {fileID: 11500000, guid: d2d6cf71b1c138b43b9f4095fd2bc830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   navigationTargetsParent: {fileID: 4765224596706237456}

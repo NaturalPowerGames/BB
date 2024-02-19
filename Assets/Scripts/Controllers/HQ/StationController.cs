@@ -41,7 +41,7 @@ namespace BB.Stations
 		public bool Interact<T>(T other)
 		{
 			Buddy buddy = other as Buddy;
-			Debug.Log($"{buddy.buddyType}: Interacting");
+			Debug.Log($"{buddy.buddyType}: Interacting with {name}");
 			station.AddBuddyToStation(buddy);
 			SubscribeToTicks(TickTime.Large); //when there's more than 1 buddy in ANY station, this needs to go out
 			return true; // if the station is full, it won't allow interactions
@@ -50,7 +50,7 @@ namespace BB.Stations
 		public void StopInteraction<T>(T other)
 		{
 			Buddy buddy = other as Buddy;
-			Debug.Log($"{buddy.buddyType}: Stop interacting");
+			Debug.Log($"{buddy.buddyType}: Stop interacting with {name}");
 			station.RemoveBuddyFromStation(buddy);
 			UnsubscribeFromTicks(TickTime.Large);   //needs to check if the station is actually empty
 		}

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace BB.Buddies
 {
@@ -15,7 +16,7 @@ namespace BB.Buddies
 
 		public Needs(float[] needs, float[] ratesPerTick, float[] needUrgencyThresholds, float[] needSatisfyThresholds)
 		{
-			this.currentNeeds = needs ?? new float[5];
+			this.currentNeeds = needs.ToArray() ?? new float[5];
 			this.ratesPerTick = ratesPerTick;
 			this.needUrgencyThresholds = needUrgencyThresholds;
 			this.needSatisfyThresholds = needSatisfyThresholds;

@@ -4,6 +4,7 @@ namespace BB.Buddies
 	public class WorkData
 	{
 		public float BaseMotivation, MotivationDepletionRate, MotivationIncreaseRate, MinimumMotivationRequiredToWork;
+		[EnumNamedArray(typeof(GatheringType))]
 		public float[] WorkPreferences;
 	}
 }
