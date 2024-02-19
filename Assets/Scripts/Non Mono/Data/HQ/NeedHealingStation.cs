@@ -1,13 +1,11 @@
 using BB.Buddies;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 namespace BB.Stations
 {
-	public class HealingStation : Station
+	public class NeedHealingStation : Station
 	{
-		private Need need;
+		private readonly Need need;
 		public Need GetNeed()
 		{
 			return need;

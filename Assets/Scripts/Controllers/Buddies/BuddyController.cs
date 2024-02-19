@@ -1,3 +1,4 @@
+using BB.Stations;
 using BB.TimeManagement;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace BB.Buddies
 
 		public void OnPointerDown(PointerEventData eventData)
 		{
-			BuddyEvents.OnBuddySelected?.Invoke(buddy);
+			BuddyEvents<Need>.OnBuddySelected?.Invoke(buddy);
 		}
 
 		public void Initialize(Buddy buddy)
@@ -47,7 +48,7 @@ namespace BB.Buddies
 
 		private void FindStation(Need need)
 		{
-            BuddyEvents.OnNearestStationRequested?.Invoke(need, transform.position, GoToStation);
+            StationEvents<Need>.OnNearestStationRequested?.Invoke(need, transform.position, GoToStation);
         }
 
 		private void GoToStation(IInteractable station)
@@ -72,7 +73,7 @@ namespace BB.Buddies
 
 			if(ResourcesNeeded.Count > 0)
 			{
-				BuddyEvents.OnNearestStationRequested?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
+				StationEvents<Need>.OnNearestStationRequested?.Invoke(ResourcesNeeded[0], transform.position, GoToStation);
             }
 		}
 

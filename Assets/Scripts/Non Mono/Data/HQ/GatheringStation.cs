@@ -1,10 +1,11 @@
 namespace BB.Stations
 {
-	public class WorkStation : Station
+	public class GatheringStation : Station
 	{
 		private GatheringType gatheringType;
-		
-		public WorkStation(GatheringType gatheringType, float interactionBenefitRate)
+		public GatheringType GatheringType => gatheringType;
+
+		public GatheringStation(GatheringType gatheringType, float interactionBenefitRate)
 		{
 			this.gatheringType = gatheringType;			
 			this.interactionBenefitRate = interactionBenefitRate;
@@ -17,6 +18,6 @@ namespace BB.Stations
 				ResourceEvents.OnResourceCollected?.Invoke(gatheringType, interactionBenefitRate);
 			}
 			base.PerformInteractionEffect();
-		}
+		}		
 	}
 }
