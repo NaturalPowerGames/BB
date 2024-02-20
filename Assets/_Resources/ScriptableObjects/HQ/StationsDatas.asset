@@ -23,7 +23,3 @@ MonoBehaviour:
     needRate: 0
   - need: 4
     needRate: 0
-  - need: 5
-    needRate: 0
-  - need: 6
-    needRate: 0

@@ -32,8 +32,7 @@ namespace BB.Stations
 		}
 
 		public virtual void HandleBuddies()  //is there a better way? ugly
-        {
-           
+        {           
             foreach (var buddy in buddiesToAdd)
 			{
                 buddiesInteracting.Add(buddy);

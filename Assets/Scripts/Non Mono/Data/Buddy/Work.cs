@@ -33,16 +33,6 @@ namespace BB.Buddies
 			}
 		}
 
-		private GatheringType WeighedRandomTaskSelection()
-		{
-			float totalWeight = workPreferences.Sum();
-			float randomValue = UnityEngine.Random.Range(0f, totalWeight);
-			int selectedIndex = workPreferences.Select((w, i) => new { Weight = w, Index = i })
-									   .First(x => (randomValue -= x.Weight) <= 0)
-									   .Index;
-			return (GatheringType)selectedIndex;
-		}
-
 		private readonly float motivationDepletionRate, motivationIncreaseRate, minimumMotivationRequiredToWork; //whenever we need to buff/debuff these, we need publics
 		private readonly float[] workPreferences;
 
@@ -73,6 +63,16 @@ namespace BB.Buddies
 		public void PerformWork()
 		{
 			CurrentMotivation -= motivationDepletionRate;
+		}
+
+		private GatheringType WeighedRandomTaskSelection()
+		{
+			float totalWeight = workPreferences.Sum();
+			float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+			int selectedIndex = workPreferences.Select((w, i) => new { Weight = w, Index = i })
+									   .First(x => (randomValue -= x.Weight) <= 0)
+									   .Index;
+			return (GatheringType)selectedIndex;
 		}
 
 		public bool IsMotivated { get { return currentMotivation >= minimumMotivationRequiredToWork; } }
