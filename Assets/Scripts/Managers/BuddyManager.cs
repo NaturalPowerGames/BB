@@ -21,7 +21,9 @@ namespace BB.Buddies
 		{
 			var buddy = Instantiate(buddyPrefabs.prefabs[(int)buddyType], position, Quaternion.identity);
 			var buddyData = dataContainer.data[(int)buddyType];
-			buddy.Initialize(new Buddy(buddyType, buddyData.BaseNeeds, buddyData.RatesPerTick, buddyData.NeedsUrgencyThresholds, buddyData.NeedsSatisfyThresholds));
+			var needs = new Needs(buddyData.NeedData.BaseNeeds, buddyData.NeedData.RatesPerTick, buddyData.NeedData.NeedsUrgencyThresholds, buddyData.NeedData.NeedsSatisfyThresholds);
+			var work = new Work(buddyData.WorkData.BaseMotivation, buddyData.WorkData.MotivationDepletionRate, buddyData.WorkData.MotivationIncreaseRate, buddyData.WorkData.MinimumMotivationRequiredToWork, buddyData.WorkData.WorkPreferences);
+			buddy.Initialize(new Buddy(buddyType, needs, work));
 		}
 	}
 }

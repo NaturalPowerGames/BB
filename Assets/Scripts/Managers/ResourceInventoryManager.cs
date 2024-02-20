@@ -4,7 +4,7 @@ using UnityEngine;
 public class ResourceInventoryManager : MonoBehaviour
 {
     [SerializeField]
-    private int[] resources;
+    private float[] resources;
 
     private void OnEnable()
     {
@@ -18,11 +18,11 @@ public class ResourceInventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        resources = new int[Enum.GetNames(typeof(ResourceType)).Length];
+        resources = new float[Enum.GetNames(typeof(GatheringType)).Length];
         resources.InitializeArray();
     }
 
-    private void OnResourceCollected(ResourceType resourceType, int amount)
+    private void OnResourceCollected(GatheringType resourceType, float amount)
     {
         resources[(int)resourceType] += amount;
         HUDEvents.OnResourceInventoryUpdate?.Invoke(resourceType, resources[(int)resourceType]);

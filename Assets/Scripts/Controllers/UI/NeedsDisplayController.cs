@@ -25,18 +25,18 @@ namespace BB.UI
 
 		private void OnEnable()
 		{
-			BuddyEvents.OnBuddySelected += OnBuddySelected;
+			BuddyEvents<Need>.OnBuddySelected += OnBuddySelected; //this isn't foolproof, very POC
 		}
 
 		private void OnDisable()
 		{
-			BuddyEvents.OnBuddySelected += OnBuddySelected;
+			BuddyEvents<Need>.OnBuddySelected -= OnBuddySelected;
 		}
 
-		private void OnBuddySelected(Buddy obj)
+		private void OnBuddySelected(Buddy buddy)
 		{
 			ToggleVisuals(true);
-			obj.OnNeedsChanged += OnNeedsChanged;
+			buddy.Needs.OnNeedsChanged += OnNeedsChanged;
 		}
 
 		private void OnNeedsChanged(float[] needs)

@@ -11,7 +11,7 @@ namespace BB.Plants
         private int growPoints;
         public PlantStatus status;
         public PlantType plantType;
-        public ResourceType resourceType;
+        public GatheringType resourceType;
 
         public Plant(PlantData plantData)
         {
@@ -19,7 +19,7 @@ namespace BB.Plants
             plantType = plantData.plantType;
             status = PlantStatus.Growing;
             growPoints = 0;
-            resourceType = ResourceType.Wood;
+            resourceType = GatheringType.Wood;
         }
 
         public int GrowPoints

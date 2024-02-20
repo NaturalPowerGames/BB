@@ -21,9 +21,9 @@ namespace BB.UI
             HUDEvents.OnResourceInventoryUpdate += OnResourceInventoryUpdate;
         }
 
-        private void OnResourceInventoryUpdate(ResourceType resourceType, int amount)
+        private void OnResourceInventoryUpdate(GatheringType resourceType, float amount)
         {
-            resources[(int)resourceType].text = amount.ToString();
+            resources[(int)resourceType].text = amount.ToString("0");
         }
     }
 }

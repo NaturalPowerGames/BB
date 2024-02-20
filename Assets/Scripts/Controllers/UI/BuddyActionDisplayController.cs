@@ -30,7 +30,7 @@ namespace BB.Buddies
 
 		public void Initialize(Buddy buddy)
 		{
-			buddy.OnNeedUrgencyChanged += OnNeedUrgencyChanged;
+			buddy.Needs.OnNeedUrgencyChanged += OnNeedUrgencyChanged;
 		}
 
 		private void OnNeedUrgencyChanged(Need need, bool urgent)
